@@ -118,12 +118,14 @@
 		if (this.onErrorCallback) {
 			this.onErrorCallback();
 		}
+		this.removeEvents();
 	};
 
 	Notify.prototype.removeEvents = function () {
 		this.myNotify.removeEventListener('show', this, false);
 		this.myNotify.removeEventListener('close', this, false);
 		this.myNotify.removeEventListener('click', this, false);
+		this.myNotify.removeEventListener('error', this, false);
 	};
 
 	Notify.prototype.destroy = function () {
