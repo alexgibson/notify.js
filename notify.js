@@ -76,6 +76,7 @@
 	};
 
 	Notify.prototype.show = function () {
+		if (!this.notifications) { return; }
 		if (this.notifications.checkPermission() === 0) {
 			this.createNotification();
 		} else {
