@@ -10,14 +10,18 @@
 (function (window, document) {
 	'use strict';
 
-	function Notify(options, display, close, click, error) {
+	function Notify(options) {
 
 		var i;
 
 		this.options = {
 			icon: '',
 			title: 'Insert title',
-			message: 'Insert message'
+			message: 'Insert message',
+			notifyShow: null,
+			notifyClose: null,
+			notifyClick: null,
+			notifyError: null
 		};
 
 		//User defined options for notification content
@@ -30,23 +34,23 @@
 		}
 
 		//User defined callback when notification is displayed
-		if (typeof display === 'function') {
-			this.onDisplayCallback = display;
+		if (typeof this.options.notifyShow === 'function') {
+			this.onShowCallback = this.options.notifyShow;
 		}
 
 		//User defined callback when notification is closed
-		if (typeof close === 'function') {
-			this.onCloseCallback = close;
+		if (typeof this.options.notifyClose === 'function') {
+			this.onCloseCallback = this.options.notifyClose;
 		}
 
 		//User defined callback when notification is clicked
-		if (typeof click === 'function') {
-			this.onClickCallback = click;
+		if (typeof this.options.notifyClick === 'function') {
+			this.onClickCallback = this.options.notifyClick;
 		}
 
 		//User defined callback when notification is clicked
-		if (typeof error === 'function') {
-			this.onErrorCallback = error;
+		if (typeof this.options.notifyError === 'function') {
+			this.onErrorCallback = this.options.notifyError;
 		}
 
 		if (window.webkitNotifications) {
@@ -88,9 +92,9 @@
 		this.myNotify.show();
 	};
 
-	Notify.prototype.onDisplayNotification = function (e) {
-		if (this.onDisplayCallback) {
-			this.onDisplayCallback();
+	Notify.prototype.onShowNotification = function (e) {
+		if (this.onShowCallback) {
+			this.onShowCallback();
 		}
 	};
 
@@ -120,9 +124,15 @@
 		this.myNotify.removeEventListener('click', this, false);
 	};
 
+	Notify.prototype.destroy = function () {
+		this.removeEvents();
+		this.myNotify = null;
+		this.notifications = null;
+	};
+
 	Notify.prototype.handleEvent = function (e) {
 		switch (e.type) {
-		case 'show': this.onDisplayNotification(e); break;
+		case 'show': this.onShowNotification(e); break;
 		case 'close': this.onCloseNotification(e); break;
 		case 'click': this.onClickNotification(e); break;
 		case 'error': this.onErrorNotification(e); break;

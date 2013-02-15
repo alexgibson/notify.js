@@ -15,7 +15,11 @@ First, include the main notify.js JavaScript file in your HTML document:
 Next create a new Notify instance, passing the relevant message parameters and callbacks you want to use:
 
 ```
-var myNotification = new Notify({title: 'Yo dawg!', message: 'This is an awesome notification'}, onNotifyShow, onNotifyClose, onNotifyClick, onNotifyError);
+var myNotification = new Notify({title: 'Yo dawg!', message: 'This is an awesome notification', notifyShow: onNotifyShow});
+
+function onNotifyShow() {
+	console.log('notification was shown!');
+}
 ```
 
 To then show your notification, you can simply call:
@@ -25,6 +29,16 @@ myNotification.show();
 ```
 
 Notify.js will automatically handle requesting user permission and the associated API events for you.
+
+Options
+------------
+
+* title: (string) - notification title
+* message: (string) - notification message
+* notifyShow: (function) - callback when the notification is shown
+* notifyClose: (function) - callback when the notification is closed
+* notifyClick: (function) - callback when the notification is clicked
+* notifyError: (function) - callback when there is a permission error
 
 Supported web browsers
 ---------------------------------------
