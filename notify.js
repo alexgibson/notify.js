@@ -5,7 +5,7 @@
  */
 
 /*global clearInterval: false, clearTimeout: false, document: false, event: false, frames: false, history: false, Image: false, location: false, name: false, navigator: false, Option: false, parent: false, screen: false, setInterval: false, setTimeout: false, window: false, XMLHttpRequest: false, console: false */
-/*global webkitNotifications: false */
+/*global webkitNotifications: false, Notifications: false */
 
 (function (window, document) {
 	'use strict';
@@ -26,31 +26,32 @@
 
 		//User defined options for notification content
 		if (typeof options === 'object') {
+
 			for (i in options) {
 				if (options.hasOwnProperty(i)) {
 					this.options[i] = options[i];
 				}
 			}
-		}
 
-		//User defined callback when notification is displayed
-		if (typeof this.options.notifyShow === 'function') {
-			this.onShowCallback = this.options.notifyShow;
-		}
+			//callback when notification is displayed
+			if (typeof this.options.notifyShow === 'function') {
+				this.onShowCallback = this.options.notifyShow;
+			}
 
-		//User defined callback when notification is closed
-		if (typeof this.options.notifyClose === 'function') {
-			this.onCloseCallback = this.options.notifyClose;
-		}
+			//callback when notification is closed
+			if (typeof this.options.notifyClose === 'function') {
+				this.onCloseCallback = this.options.notifyClose;
+			}
 
-		//User defined callback when notification is clicked
-		if (typeof this.options.notifyClick === 'function') {
-			this.onClickCallback = this.options.notifyClick;
-		}
+			//callback when notification is clicked
+			if (typeof this.options.notifyClick === 'function') {
+				this.onClickCallback = this.options.notifyClick;
+			}
 
-		//User defined callback when notification is clicked
-		if (typeof this.options.notifyError === 'function') {
-			this.onErrorCallback = this.options.notifyError;
+			//callback when notification is clicked
+			if (typeof this.options.notifyError === 'function') {
+				this.onErrorCallback = this.options.notifyError;
+			}
 		}
 
 		if (window.webkitNotifications) {
