@@ -49,6 +49,8 @@ Supported web browsers
 
 - Chrome
 - Safari 6
+
+Browsers that do not yet support the Web Notification API will simply report a console warning instead of a showing notification.
 	
 MIT License
 ---------------------------------------
