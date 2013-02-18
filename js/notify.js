@@ -68,6 +68,11 @@
 			console.warn('Web Notifications are not currently supported by this browser');
 			return;
 		}
+
+		this.myNotify = new Notification(this.title, { 
+			'body': this.options.body,
+			'tag' : this.options.tag,
+		});
 	}
 
 	Notify.prototype.requestPermission = function () {
@@ -75,10 +80,10 @@
 		this.notifications.requestPermission(function () {
 			switch (that.notifications.checkPermission()) {
 			case 0: //WebKit
-				that.createNotification();
+				that.showNotification();
 				break;
 			case 'granted': //W3C
-				that.createNotification();
+				that.showNotification();
 				break;
 			case 2: //WebKit
 				that.onPermissionDenied();
@@ -95,24 +100,16 @@
 		if (!this.notifications) { return; }
 		permission = this.notifications.checkPermission();
 		if (permission === 0 || permission === 'granted') { //WebKit || W3C
-			this.createNotification();
+			this.showNotification();
 		} else {
 			this.requestPermission();
 		}
 	};
 
-	Notify.prototype.createNotification = function () {
-		var date = new Date();
-
-		this.myNotify = new Notification(this.title, { 
-			'body': this.options.body,
-			'tag' : this.options.tag,
-		});
-
+	Notify.prototype.showNotification = function () {
 		this.myNotify.addEventListener('show', this, false);
 		this.myNotify.addEventListener('close', this, false);
 		this.myNotify.addEventListener('click', this, false);
-		this.myNotify.addEventListener('error', this, false);
 		this.myNotify.show();
 	};
 
@@ -147,7 +144,6 @@
 		this.myNotify.removeEventListener('show', this, false);
 		this.myNotify.removeEventListener('close', this, false);
 		this.myNotify.removeEventListener('click', this, false);
-		this.myNotify.removeEventListener('error', this, false);
 	};
 
 	Notify.prototype.destroy = function () {
