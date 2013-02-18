@@ -26,7 +26,7 @@ var myApp = (function () {
 		},
 
 		onPermissionDenied: function () {
-			console.log('Permission has been denied by the user');
+			alery('Permission has been denied by the user for this domain');
 		},
 
 		init: function () {
