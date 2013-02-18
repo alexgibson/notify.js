@@ -43,11 +43,15 @@ myNotification.show();
 
 Notify.js will automatically handle requesting user permission and the associated API events for you. It also goes some way toward bridging the gap between the current WebKit implementation and what's in the official W3C specification.
 
-Options
-------------
+Required parameters
+-------------------
 
-* title: (string) - notification title
-* message: (string) - notification message
+* title (string) - notification title
+
+Optional parameters
+-------------------
+
+* body: (string) - notification message body
 * notifyShow: (function) - callback when the notification is shown
 * notifyClose: (function) - callback when the notification is closed
 * notifyClick: (function) - callback when the notification is clicked
