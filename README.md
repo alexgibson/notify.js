@@ -25,11 +25,12 @@ Next create a new Notify instance, passing the relevant message parameters and c
 
 ```
 var myNotification = new Notify('Yo dawg!', {
-	body: 'This is an awesome notification', 
+	body: 'This is an awesome notification',
+	tag: 'Some unique identifier',
 	notifyShow: myApp.onShowNotification, 
 	notifyClose: myApp.onCloseNotification, 
 	notifyClick: myApp.onClickNotification, 
-	notifyError: myApp.onErrorNotification
+	permissionDenied: myApp.onErrorNotification
 });
 
 function onNotifyShow() {
@@ -55,7 +56,7 @@ Optional parameters
 * notifyShow: (function) - callback when the notification is shown
 * notifyClose: (function) - callback when the notification is closed
 * notifyClick: (function) - callback when the notification is clicked
-* notifyError: (function) - callback when there is a permission error
+* permissionDenied: (function) - callback when user has denied permission for domain
 
 Supported web browsers
 ---------------------------------------
