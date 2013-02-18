@@ -95,16 +95,18 @@
 	};
 
 	Notify.prototype.createNotification = function () {
-		try {
-			this.myNotify = this.notifications.createNotification(this.options.iconPath, this.title, this.options.body);
-			this.myNotify.addEventListener('show', this, false);
-			this.myNotify.addEventListener('close', this, false);
-			this.myNotify.addEventListener('click', this, false);
-			this.myNotify.addEventListener('error', this, false);
-			this.myNotify.show();
-		} catch (e) {
-			console.error(e);
-		}
+		var date = new Date();
+
+		this.myNotify = new Notification(this.title, { 
+			'body': this.options.body,
+			'tag' : date.getTime().toString(), //prevents duplicates being shown if multiple tabs are open
+		});
+
+		this.myNotify.addEventListener('show', this, false);
+		this.myNotify.addEventListener('close', this, false);
+		this.myNotify.addEventListener('click', this, false);
+		this.myNotify.addEventListener('error', this, false);
+		this.myNotify.show();
 	};
 
 	Notify.prototype.onShowNotification = function (e) {
