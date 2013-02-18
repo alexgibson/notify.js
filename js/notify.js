@@ -59,10 +59,10 @@
 			}
 		}
 
-		if (window.webkitNotifications) {
-			this.notifications = window.webkitNotifications;
-		} else if (window.Notifications) {
+		if (window.Notifications) {
 			this.notifications = window.Notifications;
+		} else if (window.webkitNotifications) {
+			this.notifications = window.webkitNotifications;
 		} else {
 			console.warn('Web Notifications are not currently supported by this browser');
 			return;
