@@ -71,13 +71,18 @@
 			case 0:
 				that.createNotification();
 				break;
+			case 'granted':
+				that.createNotification();
+				break;
 			}
 		});
 	};
 
 	Notify.prototype.show = function () {
+		var permission;
 		if (!this.notifications) { return; }
-		if (this.notifications.checkPermission() === 0) {
+		permission = this.notifications.checkPermission();
+		if (permission === 0 || permission === 'granted') {
 			this.createNotification();
 		} else {
 			this.requestPermission();
