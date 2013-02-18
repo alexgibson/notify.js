@@ -25,15 +25,15 @@ var myApp = (function () {
 			console.log('notification was clicked!');
 		},
 
-		onErrorNotification: function () {
-			console.log('notification permission error!');
+		onPermissionDenied: function () {
+			console.log('Permission has been denied by the user');
 		},
 
 		init: function () {
 			var doc = document;
 
 			doc.getElementById('my-button').addEventListener('click', function () {
-				var myNotification = new Notify('Yo dawg!', {body: 'This is an awesome notification', notifyShow: myApp.onShowNotification, notifyClose: myApp.onCloseNotification, notifyClick: myApp.onClickNotification, notifyError: myApp.onErrorNotification});
+				var myNotification = new Notify('Yo dawg!', {body: 'This is an awesome notification', tag: 'My unique id', notifyShow: myApp.onShowNotification, notifyClose: myApp.onCloseNotification, notifyClick: myApp.onClickNotification, permissionDenied: myApp.onPermissionDenied});
 				myNotification.show();
 			}, false);
 
