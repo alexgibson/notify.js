@@ -68,10 +68,10 @@
 		var that = this;
 		this.notifications.requestPermission(function () {
 			switch (that.notifications.checkPermission()) {
-			case 0:
+			case 0: //WebKit
 				that.createNotification();
 				break;
-			case 'granted':
+			case 'granted': //W3C
 				that.createNotification();
 				break;
 			}
@@ -82,7 +82,7 @@
 		var permission;
 		if (!this.notifications) { return; }
 		permission = this.notifications.checkPermission();
-		if (permission === 0 || permission === 'granted') {
+		if (permission === 0 || permission === 'granted') { //WebKit || W3C
 			this.createNotification();
 		} else {
 			this.requestPermission();
@@ -90,12 +90,16 @@
 	};
 
 	Notify.prototype.createNotification = function () {
-		this.myNotify = this.notifications.createNotification(this.options.icon, this.options.title, this.options.message);
-		this.myNotify.addEventListener('show', this, false);
-		this.myNotify.addEventListener('close', this, false);
-		this.myNotify.addEventListener('click', this, false);
-		this.myNotify.addEventListener('error', this, false);
-		this.myNotify.show();
+		try {
+			this.myNotify = this.notifications.createNotification(this.options.icon, this.options.title, this.options.message);
+			this.myNotify.addEventListener('show', this, false);
+			this.myNotify.addEventListener('close', this, false);
+			this.myNotify.addEventListener('click', this, false);
+			this.myNotify.addEventListener('error', this, false);
+			this.myNotify.show();
+		} catch (e) {
+			console.error(e);
+		}
 	};
 
 	Notify.prototype.onShowNotification = function (e) {
