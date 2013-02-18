@@ -1,7 +1,14 @@
 Notify.js
 =========
 
-A handy wrapper for the Web Notifications API
+A handy wrapper for the Web Notifications API.
+
+Installation
+---------------------------------------
+
+* Download: [zip](https://github.com/alexgibson/notify.js/zipball/master)
+* [Bower](https://github.com/twitter/bower/): `bower install notify.js`
+* Git: `git clone https://github.com/alexgibson/notify.js`
 
 Setup
 ---------
