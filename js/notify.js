@@ -19,10 +19,11 @@
 		this.options = {
 			iconPath: '',
 			body: '',
+			tag: '',
 			notifyShow: null,
 			notifyClose: null,
 			notifyClick: null,
-			notifyError: null
+			permissionDenied: null
 		};
 
 		if (!this.title) {
@@ -54,8 +55,8 @@
 			}
 
 			//callback when notification is clicked
-			if (typeof this.options.notifyError === 'function') {
-				this.onErrorCallback = this.options.notifyError;
+			if (typeof this.options.permissionDenied === 'function') {
+				this.onPermissionDeniedCallback = this.options.permissionDenied;
 			}
 		}
 
@@ -79,6 +80,12 @@
 			case 'granted': //W3C
 				that.createNotification();
 				break;
+			case 2: //WebKit
+				that.onPermissionDenied();
+				break;
+			case 'denied': //W3C
+				that.onPermissionDenied();
+				break;
 			}
 		});
 	};
@@ -99,7 +106,7 @@
 
 		this.myNotify = new Notification(this.title, { 
 			'body': this.options.body,
-			'tag' : date.getTime().toString(), //prevents duplicates being shown if multiple tabs are open
+			'tag' : this.options.tag,
 		});
 
 		this.myNotify.addEventListener('show', this, false);
@@ -119,21 +126,21 @@
 		if (this.onCloseCallback) {
 			this.onCloseCallback();
 		}
-		this.removeEvents();
+		this.destroy();
 	};
 
 	Notify.prototype.onClickNotification = function (e) {
 		if (this.onClickCallback) {
 			this.onClickCallback();
 		}
-		this.removeEvents();
+		this.destroy();
 	};
 
-	Notify.prototype.onErrorNotification = function (e) {
-		if (this.onErrorCallback) {
-			this.onErrorCallback();
+	Notify.prototype.onPermissionDenied = function (e) {
+		if (this.onPermissionDeniedCallback) {
+			this.onPermissionDeniedCallback();
 		}
-		this.removeEvents();
+		this.destroy();
 	};
 
 	Notify.prototype.removeEvents = function () {
@@ -146,7 +153,6 @@
 	Notify.prototype.destroy = function () {
 		this.removeEvents();
 		this.myNotify = null;
-		this.notifications = null;
 	};
 
 	Notify.prototype.handleEvent = function (e) {
@@ -154,7 +160,6 @@
 		case 'show': this.onShowNotification(e); break;
 		case 'close': this.onCloseNotification(e); break;
 		case 'click': this.onClickNotification(e); break;
-		case 'error': this.onErrorNotification(e); break;
 		}
 	};
 
