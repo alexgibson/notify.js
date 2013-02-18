@@ -27,10 +27,7 @@ Next create a new Notify instance, passing the relevant message parameters and c
 var myNotification = new Notify('Yo dawg!', {
 	body: 'This is an awesome notification',
 	tag: 'Some unique identifier',
-	notifyShow: myApp.onShowNotification, 
-	notifyClose: myApp.onCloseNotification, 
-	notifyClick: myApp.onClickNotification, 
-	permissionDenied: myApp.onErrorNotification
+	notifyShow: onNotifyShow
 });
 
 function onNotifyShow() {
