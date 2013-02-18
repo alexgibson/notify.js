@@ -10,19 +10,24 @@
 (function (window, document) {
 	'use strict';
 
-	function Notify(options) {
+	function Notify(title, options) {
 
 		var i;
 
+		this.title = typeof title === 'string' ? title : null;
+
 		this.options = {
-			icon: '',
-			title: 'Insert title',
-			message: 'Insert message',
+			iconPath: '',
+			body: '',
 			notifyShow: null,
 			notifyClose: null,
 			notifyClick: null,
 			notifyError: null
 		};
+
+		if (!this.title) {
+			throw new Error('Notify(): first arg (title) must be a string.');
+		}
 
 		//User defined options for notification content
 		if (typeof options === 'object') {
@@ -91,7 +96,7 @@
 
 	Notify.prototype.createNotification = function () {
 		try {
-			this.myNotify = this.notifications.createNotification(this.options.icon, this.options.title, this.options.message);
+			this.myNotify = this.notifications.createNotification(this.options.iconPath, this.title, this.options.body);
 			this.myNotify.addEventListener('show', this, false);
 			this.myNotify.addEventListener('close', this, false);
 			this.myNotify.addEventListener('click', this, false);

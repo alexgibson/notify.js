@@ -33,7 +33,7 @@ var myApp = (function () {
 			var doc = document;
 
 			doc.getElementById('my-button').addEventListener('click', function () {
-				var myNotification = new Notify({title: 'Yo dawg!', message: 'This is an awesome notification', notifyShow: myApp.onShowNotification, notifyClose: myApp.onCloseNotification, notifyClick: myApp.onClickNotification, notifyError: myApp.onErrorNotification});
+				var myNotification = new Notify('Yo dawg!', {body: 'This is an awesome notification', notifyShow: myApp.onShowNotification, notifyClose: myApp.onCloseNotification, notifyClick: myApp.onClickNotification, notifyError: myApp.onErrorNotification});
 				myNotification.show();
 			}, false);
 
