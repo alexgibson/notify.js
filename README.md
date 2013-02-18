@@ -39,7 +39,7 @@ To then show your notification, you can simply call:
 myNotification.show(); 
 ```
 
-Notify.js will automatically handle requesting user permission and the associated API events for you.
+Notify.js will automatically handle requesting user permission and the associated API events for you. It also goes some way toward bridging the gap between the current WebKit implementation and what's in the official W3C specification.
 
 Options
 ------------
