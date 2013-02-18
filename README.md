@@ -22,10 +22,12 @@ First, include the main notify.js JavaScript file in your HTML document:
 Next create a new Notify instance, passing the relevant message parameters and callbacks you want to use:
 
 ```
-var myNotification = new Notify({
-	title: 'Yo dawg!', 
-	message: 'This is an awesome notification', 
-	notifyShow: onNotifyShow
+var myNotification = new Notify('Yo dawg!', {
+	body: 'This is an awesome notification', 
+	notifyShow: myApp.onShowNotification, 
+	notifyClose: myApp.onCloseNotification, 
+	notifyClick: myApp.onClickNotification, 
+	notifyError: myApp.onErrorNotification
 });
 
 function onNotifyShow() {
