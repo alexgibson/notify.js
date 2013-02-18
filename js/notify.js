@@ -67,7 +67,6 @@
 	Notify.prototype.requestPermission = function () {
 		var that = this;
 		this.notifications.requestPermission(function () {
-			console.log(that.notifications.checkPermission());
 			switch (that.notifications.checkPermission()) {
 			case 0:
 				that.createNotification();
