@@ -3,7 +3,7 @@ Notify.js
 
 A handy wrapper for the [Web Notifications API](http://www.w3.org/TR/notifications/).
 
-Notify.js will automatically handle requesting user permission and associated API events for you. It also goes some way toward bridging the gap between the current WebKit implementation and what's in the official W3C specification.
+Notify.js automatically handles requesting user permission and associated API events for you. It also goes some way toward bridging the gap between the current WebKit implementation and what's in the official W3C specification, by adding a few fallbacks.
 
 Installation
 ---------------------------------------
