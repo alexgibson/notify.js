@@ -1,7 +1,7 @@
 Notify.js
 =========
 
-A handy wrapper for the Web Notifications API.
+A handy wrapper for the [Web Notifications API](http://www.w3.org/TR/notifications/).
 
 Installation
 ---------------------------------------
