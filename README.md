@@ -26,7 +26,6 @@ Next create a new Notify instance, passing the relevant message parameters and c
 ```
 var myNotification = new Notify('Yo dawg!', {
 	body: 'This is an awesome notification',
-	tag: 'Some unique identifier',
 	notifyShow: onNotifyShow
 });
 
@@ -50,6 +49,7 @@ Optional parameters
 -------------------
 
 * body: (string) - notification message body
+* tag: (string) - a unique identifier that can be passed to stop duplicate notifications
 * notifyShow: (function) - callback when the notification is shown
 * notifyClose: (function) - callback when the notification is closed
 * notifyClick: (function) - callback when the notification is clicked
