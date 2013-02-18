@@ -123,32 +123,27 @@
 		if (this.onCloseCallback) {
 			this.onCloseCallback();
 		}
-		this.destroy();
+		this.removeEvents();
 	};
 
 	Notify.prototype.onClickNotification = function (e) {
 		if (this.onClickCallback) {
 			this.onClickCallback();
 		}
-		this.destroy();
+		this.removeEvents();
 	};
 
 	Notify.prototype.onPermissionDenied = function (e) {
 		if (this.onPermissionDeniedCallback) {
 			this.onPermissionDeniedCallback();
 		}
-		this.destroy();
+		this.removeEvents();
 	};
 
 	Notify.prototype.removeEvents = function () {
 		this.myNotify.removeEventListener('show', this, false);
 		this.myNotify.removeEventListener('close', this, false);
 		this.myNotify.removeEventListener('click', this, false);
-	};
-
-	Notify.prototype.destroy = function () {
-		this.removeEvents();
-		this.myNotify = null;
 	};
 
 	Notify.prototype.handleEvent = function (e) {
