@@ -49,7 +49,7 @@ Optional parameters
 -------------------
 
 * body: (string) - notification message body
-* tag: (string) - a unique identifier that can be passed to stop duplicate notifications
+* tag: (string) - unique identifier to stop duplicate notifications
 * notifyShow: (function) - callback when the notification is shown
 * notifyClose: (function) - callback when the notification is closed
 * notifyClick: (function) - callback when the notification is clicked
