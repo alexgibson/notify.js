@@ -26,6 +26,8 @@
 			permissionDenied: null
 		};
 
+		this.permission = null;
+
 		if (!this.title) {
 			throw new Error('Notify(): first arg (title) must be a string.');
 		}
@@ -60,8 +62,8 @@
 			}
 		}
 
-		if (window.Notifications) {
-			this.notifications = window.Notifications;
+		if (window.Notification) {
+			this.notifications = window.Notification;
 		} else if (window.webkitNotifications) {
 			this.notifications = window.webkitNotifications;
 		} else {
@@ -77,8 +79,9 @@
 
 	Notify.prototype.requestPermission = function () {
 		var that = this;
-		this.notifications.requestPermission(function () {
-			switch (that.notifications.checkPermission()) {
+		this.notifications.requestPermission(function (perm) {
+			that.permission = perm;
+			switch (that.permission) {
 			case 0: //WebKit
 				that.showNotification();
 				break;
@@ -96,10 +99,8 @@
 	};
 
 	Notify.prototype.show = function () {
-		var permission;
 		if (!this.notifications) { return; }
-		permission = this.notifications.checkPermission();
-		if (permission === 0 || permission === 'granted') { //WebKit || W3C
+		if (this.permission === 0 || this.permission === 'granted') { //WebKit || W3C
 			this.showNotification();
 		} else {
 			this.requestPermission();
