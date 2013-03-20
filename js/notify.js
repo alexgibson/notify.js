@@ -60,8 +60,8 @@
 			}
 		}
 
-		if (window.Notifications) {
-			this.notifications = window.Notifications;
+		if (window.Notification) {
+			this.notifications = window.Notification;
 		} else if (window.webkitNotifications) {
 			this.notifications = window.webkitNotifications;
 		} else {
