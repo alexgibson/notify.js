@@ -60,6 +60,7 @@ Supported web browsers
 
 - Chrome
 - Safari 6
+- Firefox (nightlies)
 
 Browsers that do not yet support the Web Notification API will simply report a console warning instead of showing a notification. This plugin will be kept up to date as more browsers add support for the API and as the spec changes.
 	
