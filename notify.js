@@ -62,11 +62,7 @@
 			}
 		}
 
-		if (window.Notification) {
-			this.notifications = window.Notification;
-		} else if (window.webkitNotifications) {
-			this.notifications = window.webkitNotifications;
-		} else {
+		if (!window.Notification) {
 			console.warn('Web Notifications are not currently supported by this browser');
 			return;
 		}
@@ -79,19 +75,13 @@
 
 	Notify.prototype.requestPermission = function () {
 		var that = this;
-		this.notifications.requestPermission(function (perm) {
+		window.Notification.requestPermission(function (perm) {
 			that.permission = perm;
 			switch (that.permission) {
-			case 0: //WebKit
+			case 'granted':
 				that.showNotification();
 				break;
-			case 'granted': //W3C
-				that.showNotification();
-				break;
-			case 2: //WebKit
-				that.onPermissionDenied();
-				break;
-			case 'denied': //W3C
+			case 'denied':
 				that.onPermissionDenied();
 				break;
 			}
@@ -99,7 +89,7 @@
 	};
 
 	Notify.prototype.show = function () {
-		if (!this.notifications) { return; }
+		if (!window.Notification) { return; }
 		if (this.permission === 0 || this.permission === 'granted') { //WebKit || W3C
 			this.showNotification();
 		} else {
