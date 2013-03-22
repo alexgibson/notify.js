@@ -90,7 +90,7 @@
 
 	Notify.prototype.show = function () {
 		if (!window.Notification) { return; }
-		if (this.permission === 0 || this.permission === 'granted') { //WebKit || W3C
+		if (this.permission === 'granted') {
 			this.showNotification();
 		} else {
 			this.requestPermission();
