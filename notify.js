@@ -33,6 +33,11 @@
 
         this.permission = null;
 
+
+        if (!window.Notification) {
+            return;
+        }
+
         if (!this.title) {
             throw new Error('Notify(): first arg (title) must be a string.');
         }
@@ -65,11 +70,6 @@
             if (typeof this.options.permissionDenied === 'function') {
                 this.onPermissionDeniedCallback = this.options.permissionDenied;
             }
-        }
-
-        if (!window.Notification) {
-            console.warn('Web Notifications are not currently supported by this browser');
-            return;
         }
 
         this.myNotify = new Notification(this.title, { 

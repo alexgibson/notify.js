@@ -1,9 +1,7 @@
 Notify.js
 =========
 
-A handy wrapper for the [Web Notifications API](http://www.w3.org/TR/notifications/).
-
-Notify.js automatically handles requesting user permission and associated Web Notification API events for you.
+A handy wrapper for the [Web Notifications API](http://www.w3.org/TR/notifications/). Notify.js automatically handles requesting user permission and associated Web Notification API events for you.
 
 Installation
 ---------------------------------------
@@ -15,9 +13,9 @@ Installation
 Setup
 ---------
 
-This plugin can be used as an AMD module, or a global.
+This component can be used as an AMD module, or a global.
 
-To initialize a web notification, create a new `Notify` instance and pass in the message `title` parameter, as well as any other options and callbacks you wish to use:
+To initialize a web notification, create a new `Notify` instance. Pass in the message `title`, as well as any other options and callbacks you wish to use.
 
 ```
 var myNotification = new Notify('Yo dawg!', {
@@ -30,7 +28,7 @@ function onNotifyShow() {
 }
 ```
 
-To then show the notification, simply call:
+To then show the notification, simply call `show()`.
 
 ```
 myNotification.show(); 
@@ -58,7 +56,7 @@ Supported web browsers
 - Safari 6
 - Firefox Nightly
 
-Browsers that do not yet support the Web Notification API will simply report a console warning instead of showing a notification. This plugin will be kept up to date as more browsers add support for the API and as the spec changes.
+Browsers that do not yet support the Web Notification API will return silently.
 	
 MIT License
 ---------------------------------------
