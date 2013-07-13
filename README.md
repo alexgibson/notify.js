@@ -15,7 +15,7 @@ Setup
 
 This component can be used as an AMD module, or a global.
 
-To initialize a web notification, create a new `Notify` instance. Pass in the message `title`, as well as any other options and callbacks you wish to use.
+To initialize a web notification, create a new `Notify` instance. Pass in the message `title`, as well as any other options you wish to use.
 
 ```
 var myNotification = new Notify('Yo dawg!', {
