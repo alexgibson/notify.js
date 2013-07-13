@@ -1,8 +1,10 @@
-(function(root, factory){
+(function(root, factory) {
 
-    if (typeof define === 'function' && define.amd){
+    'use strict';
+
+    if (typeof define === 'function' && define.amd) {
         // AMD environment
-        define('notify', [], function(){
+        define('notify', [], function() {
             factory(root, window.document);
             return root.Notify;
         });
@@ -34,7 +36,7 @@
         this.permission = null;
 
 
-        if (!window.Notification) {
+        if (!w.Notification) {
             return;
         }
 
@@ -72,15 +74,15 @@
             }
         }
 
-        this.myNotify = new Notification(this.title, { 
+        this.myNotify = new Notification(this.title, {
             'body': this.options.body,
-            'tag' : this.options.tag,
+            'tag' : this.options.tag
         });
     }
 
     Notify.prototype.requestPermission = function () {
         var that = this;
-        window.Notification.requestPermission(function (perm) {
+        w.Notification.requestPermission(function (perm) {
             that.permission = perm;
             switch (that.permission) {
             case 'granted':
@@ -94,7 +96,7 @@
     };
 
     Notify.prototype.show = function () {
-        if (!window.Notification) { return; }
+        if (!w.Notification) { return; }
         if (this.permission === 'granted') {
             this.showNotification();
         } else {
@@ -109,27 +111,27 @@
         this.myNotify.show();
     };
 
-    Notify.prototype.onShowNotification = function (e) {
+    Notify.prototype.onShowNotification = function () {
         if (this.onShowCallback) {
             this.onShowCallback();
         }
     };
 
-    Notify.prototype.onCloseNotification = function (e) {
+    Notify.prototype.onCloseNotification = function () {
         if (this.onCloseCallback) {
             this.onCloseCallback();
         }
         this.removeEvents();
     };
 
-    Notify.prototype.onClickNotification = function (e) {
+    Notify.prototype.onClickNotification = function () {
         if (this.onClickCallback) {
             this.onClickCallback();
         }
         this.removeEvents();
     };
 
-    Notify.prototype.onPermissionDenied = function (e) {
+    Notify.prototype.onPermissionDenied = function () {
         if (this.onPermissionDeniedCallback) {
             this.onPermissionDeniedCallback();
         }
@@ -144,12 +146,18 @@
 
     Notify.prototype.handleEvent = function (e) {
         switch (e.type) {
-        case 'show': this.onShowNotification(e); break;
-        case 'close': this.onCloseNotification(e); break;
-        case 'click': this.onClickNotification(e); break;
+        case 'show':
+            this.onShowNotification(e);
+            break;
+        case 'close':
+            this.onCloseNotification(e);
+            break;
+        case 'click':
+            this.onClickNotification(e);
+            break;
         }
     };
 
-    window.Notify = Notify;
+    w.Notify = Notify;
 
 }));
