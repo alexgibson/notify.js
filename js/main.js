@@ -1,52 +1,38 @@
-/*
- * Copyright (c) 2013 Alex Gibson
- * Released under MIT license
- * http://alxgbsn.co.uk
- */
+require(['notify'], function() {
+    
+    'use strict';
 
-/*global clearInterval: false, clearTimeout: false, document: false, event: false, frames: false, history: false, Image: false, location: false, name: false, navigator: false, Option: false, parent: false, screen: false, setInterval: false, setTimeout: false, window: false, XMLHttpRequest: false, console: false */
-/*global webkitAudioContext: false, AudioContext: false, requestAnimationFrame: false */
+    var doc = document;
 
-var myApp = (function () {
+    function onShowNotification () {
+        console.log('notification is shown!');
+    }
 
-	'use strict';
+    function onCloseNotification () {
+        console.log('notification is closed!');
+    }
 
-	return {
+    function onClickNotification () {
+        console.log('notification was clicked!');
+    }
 
-		onShowNotification: function () {
-			console.log('notification is shown!');
-		},
+    function onPermissionDenied () {
+        alert('Permission has been denied by the user for this domain');
+    }
 
-		onCloseNotification: function () {
-			console.log('notification is closed!');
-		},
+    doc.getElementById('my-button').addEventListener('click', function () {
 
-		onClickNotification: function () {
-			console.log('notification was clicked!');
-		},
+        var myNotification = new Notify('Yo dawg!', {
+            body: 'This is an awesome notification', 
+            tag: 'My unique id', 
+            notifyShow: onShowNotification, 
+            notifyClose: onCloseNotification, 
+            notifyClick: onClickNotification, 
+            permissionDenied: onPermissionDenied
+        });
 
-		onPermissionDenied: function () {
-			alert('Permission has been denied by the user for this domain');
-		},
+        myNotification.show();
 
-		init: function () {
-			var doc = document;
+    }, false);
 
-			doc.getElementById('my-button').addEventListener('click', function () {
-				var myNotification = new Notify('Yo dawg!', {body: 'This is an awesome notification', tag: 'My unique id', notifyShow: myApp.onShowNotification, notifyClose: myApp.onCloseNotification, notifyClick: myApp.onClickNotification, permissionDenied: myApp.onPermissionDenied});
-				myNotification.show();
-			}, false);
-
-			//prevent default document scrolling
-			doc.addEventListener('touchmove', function (e) {
-				if (e.target.type === 'range') { return; }
-				e.preventDefault();
-			}, false);
-
-			//enable CSS active pseudo styles
-			doc.addEventListener("touchstart", function () {}, false);
-		}
-	};
-}());
-
-window.addEventListener("DOMContentLoaded", myApp.init, true);
+});
