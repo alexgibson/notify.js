@@ -1,25 +1,22 @@
-(function(root, factory) {
+(function (root, factory) {
 
     'use strict';
 
     if (typeof define === 'function' && define.amd) {
         // AMD environment
-        define('notify', [], function() {
-            factory(root, window.document);
-            return root.Notify;
+        define('notify', [], function () {
+            return factory(root);
         });
     } else {
         // Browser environment
-        factory(root, window.document);
+        root.Notify = factory(root);
     }
 
-}(this, function(w, d) {
+}(this, function (w) {
 
     'use strict';
 
     function Notify(title, options) {
-
-        var i;
 
         this.title = typeof title === 'string' ? title : null;
 
@@ -36,7 +33,7 @@
         this.permission = null;
 
 
-        if (!w.Notification) {
+        if (!this.isSupported) {
             return;
         }
 
@@ -47,7 +44,7 @@
         //User defined options for notification content
         if (typeof options === 'object') {
 
-            for (i in options) {
+            for (var i in options) {
                 if (options.hasOwnProperty(i)) {
                     this.options[i] = options[i];
                 }
@@ -96,7 +93,7 @@
     };
 
     Notify.prototype.show = function () {
-        if (!w.Notification) { return; }
+        if (!this.isSupported) { return; }
         if (this.permission === 'granted') {
             this.showNotification();
         } else {
@@ -121,27 +118,45 @@
         if (this.onCloseCallback) {
             this.onCloseCallback();
         }
-        this.removeEvents();
+        this.destroy();
     };
 
     Notify.prototype.onClickNotification = function () {
         if (this.onClickCallback) {
             this.onClickCallback();
         }
-        this.removeEvents();
+        this.destroy();
     };
 
     Notify.prototype.onPermissionDenied = function () {
         if (this.onPermissionDeniedCallback) {
             this.onPermissionDeniedCallback();
         }
-        this.removeEvents();
+        this.destroy();
     };
 
-    Notify.prototype.removeEvents = function () {
+    Notify.prototype.destroy = function () {
+        this.title = null;
+        this.permission = null;
+        this.options = {
+            iconPath: '',
+            body: '',
+            tag: '',
+            notifyShow: null,
+            notifyClose: null,
+            notifyClick: null,
+            permissionDenied: null
+        };
         this.myNotify.removeEventListener('show', this, false);
         this.myNotify.removeEventListener('close', this, false);
         this.myNotify.removeEventListener('click', this, false);
+    };
+
+    Notify.prototype.isSupported = function () {
+        if (w.Notification) {
+            return true;
+        }
+        return false;
     };
 
     Notify.prototype.handleEvent = function (e) {
@@ -158,6 +173,6 @@
         }
     };
 
-    w.Notify = Notify;
+    return Notify;
 
 }));
