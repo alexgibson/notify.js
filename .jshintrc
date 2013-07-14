@@ -1,0 +1,20 @@
+{
+    "globals": { 
+        "define": false,
+        "Notification": false
+    },
+    "browser": true,
+    "node": true,
+    "esnext": true,
+    "curly": true,
+    "eqeqeq": true,
+    "immed": true,
+    "latedef": false,
+    "newcap": true,
+    "undef": true,
+    "strict": true,
+    "trailing": true,
+    "white": true,
+    "indent": false,
+    "unused": true
+}
