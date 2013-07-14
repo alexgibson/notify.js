@@ -1,5 +1,5 @@
 {
-    "globals": { 
+    "globals": {
         "define": false,
         "Notification": false
     },
@@ -16,5 +16,5 @@
     "trailing": true,
     "white": true,
     "indent": false,
-    "unused": true
+    "unused": false
 }
