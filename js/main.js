@@ -1,4 +1,4 @@
-require(['notify'], function() {
+require(['notify'], function(Notify) {
     
     'use strict';
 
