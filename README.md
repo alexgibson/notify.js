@@ -52,8 +52,8 @@ Optional parameters
 Useful methods
 --------------
 
-* isSupported() - (returns boolean) test for Web Notifications API browser support
-* destroy() - remove event listeners and unregister callbacks
+* `isSupported()` - (returns boolean) test for Web Notifications API browser support
+* `destroy()` - remove event listeners and unregister callbacks
 
 Supported web browsers
 ---------------------------------------
