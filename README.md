@@ -1,7 +1,7 @@
 Notify.js
 =========
 
-Notify.js ia a handy wrapper for using the [Web Notifications API](http://www.w3.org/TR/notifications/). It automatically handles requesting user permission and associated Web Notification API events, as well as adding a few extra convenience methods.
+A handy wrapper for using the [Web Notifications API](http://www.w3.org/TR/notifications/). Notify.js automatically handles requesting user permission and associated Web Notification API events, as well as adding a few extra convenience methods.
 
 Installation
 ---------------------------------------
@@ -15,7 +15,7 @@ Setup
 
 This component can be used as an AMD module, or a global.
 
-To initialize a web notification, create a new `Notify` instance. Pass in the message `title`, as well as any other options you wish to use.
+To initialize a web notification create a new `Notify` instance, passing the message `title` as well as any other options you wish to use.
 
 ```
 var myNotification = new Notify('Yo dawg!', {
@@ -28,7 +28,7 @@ function onNotifyShow() {
 }
 ```
 
-To then show the notification, simply call `show()`.
+Then show the notification.
 
 ```
 myNotification.show(); 
@@ -53,13 +53,28 @@ Useful methods
 --------------
 
 * isSupported() - (returns boolean) test for Web Notifications API browser support
-* destroy() - remove event listeners and unregister callbacks
+* destroy() - removes event listeners
 
-Supported web browsers
+Testing
+-------
+
+Install [Node](http://nodejs.org). Testing relies on the Karma test-runner, which can be installed globally using the following command.
+
+```
+npm install -g karma
+```
+
+In the project root, perform a single run of the tests in Chrome (or any browser you choose)
+
+```
+karma start --browsers Chrome --single-run
+```
+
+Browser support
 ---------------------------------------
 
 - Chrome
-- Safari 6
-- Firefox Nightly
+- Safari 6+
+- Firefox
 
 Browsers that do not yet support the Web Notification API will return silently.
