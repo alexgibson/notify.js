@@ -136,17 +136,6 @@
     };
 
     Notify.prototype.destroy = function () {
-        this.title = null;
-        this.permission = null;
-        this.options = {
-            iconPath: '',
-            body: '',
-            tag: '',
-            notifyShow: null,
-            notifyClose: null,
-            notifyClick: null,
-            permissionDenied: null
-        };
         this.myNotify.removeEventListener('show', this, false);
         this.myNotify.removeEventListener('close', this, false);
         this.myNotify.removeEventListener('click', this, false);
