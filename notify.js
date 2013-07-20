@@ -5,12 +5,11 @@
     if (typeof define === 'function' && define.amd) {
         // AMD environment
         define('notify', [], function () {
-            factory(root, document);
-            return root.Notify;
+            return factory(root, document);
         });
     } else {
         // Browser environment
-        factory(root, document);
+        root.Notify = factory(root, document);
     }
 
 }(this, function (w, d) {
@@ -163,6 +162,6 @@
         }
     };
 
-    w.Notify = Notify;
+    return Notify;
 
 }));
