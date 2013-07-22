@@ -64,10 +64,10 @@ Install [Node](http://nodejs.org). Testing relies on the Karma test-runner, whic
 npm install -g karma
 ```
 
-In the project root, perform a single run of the tests in Chrome (or any browser you choose)
+In the project root, run the tests using
 
 ```
-karma start --browsers Chrome --single-run
+npm test
 ```
 
 Browser support
