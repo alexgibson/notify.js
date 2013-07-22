@@ -22,6 +22,6 @@
         ".jshintrc",
         "karma.conf.js",
         "package.json",
-        "travis.yml"
+        ".travis.yml"
     ]
 }
