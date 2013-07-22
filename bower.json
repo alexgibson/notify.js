@@ -20,6 +20,8 @@
     "ignore": [
         "test",
         ".jshintrc",
-        "karma.conf.js"
+        "karma.conf.js",
+        "package.json",
+        "travis.yml"
     ]
 }
