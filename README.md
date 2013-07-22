@@ -66,7 +66,7 @@ Install [Node](http://nodejs.org). Testing relies on the Karma test-runner, whic
 npm install -g karma
 ```
 
-In the project root, run the tests using
+In the project root, perform a single pass of the tests using Firefox run:
 
 ```
 npm test
