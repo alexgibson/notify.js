@@ -1,6 +1,8 @@
 Notify.js
 =========
 
+[![Build Status](https://travis-ci.org/alexgibson/notify.js.png?branch=master)](https://travis-ci.org/alexgibson/notify.js)
+
 A handy wrapper for using the [Web Notifications API](http://www.w3.org/TR/notifications/). Notify.js automatically handles requesting user permission and associated Web Notification API events, as well as adding a few extra convenience methods.
 
 Installation
