@@ -62,6 +62,14 @@ describe('callbacks', function () {
         expect(callback).toHaveBeenCalled();
     });
 
+    it('should fire error callback', function () {
+        var notification = new Notify('foo', {
+            notifyError: callback
+        });
+        notification.onErrorNotification();
+        expect(callback).toHaveBeenCalled();
+    });
+
     it('should call destroy', function () {
         var notification = new Notify('foo', {
             notifyClose: callback

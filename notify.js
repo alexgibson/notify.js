@@ -27,6 +27,7 @@
             notifyShow: null,
             notifyClose: null,
             notifyClick: null,
+            notifyError: null,
             permissionDenied: null
         };
 
@@ -65,7 +66,12 @@
                 this.onClickCallback = this.options.notifyClick;
             }
 
-            //callback when notification is clicked
+            //callback when notification throws error
+            if (typeof this.options.notifyError === 'function') {
+                this.onErrorCallback = this.options.notifyError;
+            }
+
+            //callback user denies permission for notification
             if (typeof this.options.permissionDenied === 'function') {
                 this.onPermissionDeniedCallback = this.options.permissionDenied;
             }
@@ -105,6 +111,7 @@
         this.myNotify.addEventListener('show', this, false);
         this.myNotify.addEventListener('close', this, false);
         this.myNotify.addEventListener('click', this, false);
+        this.myNotify.addEventListener('error', this, false);
         this.myNotify.show();
     };
 
@@ -128,6 +135,13 @@
         this.destroy();
     };
 
+    Notify.prototype.onErrorNotification = function () {
+        if (this.onErrorCallback) {
+            this.onErrorCallback();
+        }
+        this.destroy();
+    };
+
     Notify.prototype.onPermissionDenied = function () {
         if (this.onPermissionDeniedCallback) {
             this.onPermissionDeniedCallback();
@@ -139,6 +153,7 @@
         this.myNotify.removeEventListener('show', this, false);
         this.myNotify.removeEventListener('close', this, false);
         this.myNotify.removeEventListener('click', this, false);
+        this.myNotify.removeEventListener('error', this, false);
     };
 
     Notify.prototype.isSupported = function () {
@@ -158,6 +173,9 @@
             break;
         case 'click':
             this.onClickNotification(e);
+            break;
+        case 'error':
+            this.onErrorNotification(e);
             break;
         }
     };

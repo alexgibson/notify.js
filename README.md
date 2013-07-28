@@ -46,10 +46,11 @@ Optional parameters
 
 * body: (string) - notification message body
 * tag: (string) - unique identifier to stop duplicate notifications
-* notifyShow: (function) - callback when the notification is shown
-* notifyClose: (function) - callback when the notification is closed
-* notifyClick: (function) - callback when the notification is clicked
-* permissionDenied: (function) - callback when user has denied permission for domain
+* notifyShow: (function) - callback when notification is shown
+* notifyClose: (function) - callback when notification is closed
+* notifyClick: (function) - callback when notification is clicked
+* notifyError: (function) - callback when notification throws an error
+* permissionDenied: (function) - callback when user has denied permission
 
 Useful methods
 --------------
@@ -76,7 +77,6 @@ Browser support
 ---------------------------------------
 
 - Chrome
-- Safari 6+
+- Safari
 - Firefox
-
-Browsers that do not yet support the Web Notification API will return silently.
+- Firefox Mobile (Android)
