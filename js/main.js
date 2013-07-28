@@ -1,8 +1,8 @@
-require(['notify'], function(Notify) {
+define(function(require) {
     
     'use strict';
 
-    var doc = document;
+    var Notify = require('notify');
 
     function onShowNotification () {
         console.log('notification is shown!');
@@ -20,7 +20,7 @@ require(['notify'], function(Notify) {
         alert('Permission has been denied by the user for this domain');
     }
 
-    doc.getElementById('my-button').addEventListener('click', function () {
+    document.getElementById('my-button').addEventListener('click', function () {
 
         var myNotification = new Notify('Yo dawg!', {
             body: 'This is an awesome notification', 
