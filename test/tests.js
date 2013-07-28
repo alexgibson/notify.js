@@ -42,6 +42,7 @@ describe('callbacks', function () {
         var notification = new Notify('foo', {
             notifyClose: callback
         });
+        notification.showNotification();
         notification.onCloseNotification();
         expect(callback).toHaveBeenCalled();
     });
@@ -50,6 +51,7 @@ describe('callbacks', function () {
         var notification = new Notify('foo', {
             notifyClick: callback
         });
+        notification.showNotification();
         notification.onClickNotification();
         expect(callback).toHaveBeenCalled();
     });
@@ -58,6 +60,7 @@ describe('callbacks', function () {
         var notification = new Notify('foo', {
             permissionDenied: callback
         });
+        notification.showNotification();
         notification.onPermissionDenied();
         expect(callback).toHaveBeenCalled();
     });
@@ -66,6 +69,7 @@ describe('callbacks', function () {
         var notification = new Notify('foo', {
             notifyError: callback
         });
+        notification.showNotification();
         notification.onErrorNotification();
         expect(callback).toHaveBeenCalled();
     });
