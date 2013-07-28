@@ -45,6 +45,7 @@ Optional parameters
 -------------------
 
 * body: (string) - notification message body
+* icon: (string) - path for icon to display in notification
 * tag: (string) - unique identifier to stop duplicate notifications
 * notifyShow: (function) - callback when notification is shown
 * notifyClose: (function) - callback when notification is closed

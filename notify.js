@@ -21,7 +21,7 @@
         this.title = typeof title === 'string' ? title : null;
 
         this.options = {
-            iconPath: '',
+            icon: '',
             body: '',
             tag: '',
             notifyShow: null,
@@ -76,11 +76,6 @@
                 this.onPermissionDeniedCallback = this.options.permissionDenied;
             }
         }
-
-        this.myNotify = new Notification(this.title, {
-            'body': this.options.body,
-            'tag' : this.options.tag
-        });
     }
 
     Notify.prototype.requestPermission = function () {
@@ -108,11 +103,16 @@
     };
 
     Notify.prototype.showNotification = function () {
+
+        this.myNotify = new Notification(this.title, {
+            'body': this.options.body,
+            'tag' : this.options.tag
+        });
+
         this.myNotify.addEventListener('show', this, false);
         this.myNotify.addEventListener('close', this, false);
         this.myNotify.addEventListener('click', this, false);
         this.myNotify.addEventListener('error', this, false);
-        this.myNotify.show();
     };
 
     Notify.prototype.onShowNotification = function () {
