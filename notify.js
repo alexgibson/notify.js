@@ -132,7 +132,6 @@
         if (this.onClickCallback) {
             this.onClickCallback();
         }
-        this.destroy();
     };
 
     Notify.prototype.onErrorNotification = function () {
@@ -146,7 +145,6 @@
         if (this.onPermissionDeniedCallback) {
             this.onPermissionDeniedCallback();
         }
-        this.destroy();
     };
 
     Notify.prototype.destroy = function () {
