@@ -11,9 +11,7 @@ files = [
   JASMINE,
   JASMINE_ADAPTER,
   'notify.js',
-  'test/*.js',
-
-  { pattern: 'node_modules/sinon/pkg/sinon.js', watched: false, included: true }
+  'test/*.js'
 ];
 
 
@@ -25,7 +23,7 @@ exclude = [
 
 // test results reporter to use
 // possible values: 'dots', 'progress', 'junit'
-reporters = ['progress'];
+reporters = ['dots'];
 
 
 // web server port
