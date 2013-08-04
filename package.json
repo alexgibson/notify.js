@@ -1,11 +1,27 @@
 {
-    "name": "notify.js",
-    "description": "A handy wrapper for the Web Notifications API",
-    "version": "1.1.0",
-    "devDependencies": {
-        "karma": "~0.8.5"
-    },
-    "scripts": {
-        "test": "./node_modules/.bin/karma start --browsers Firefox --single-run"
-    }
+  "name": "notify.js",
+  "version": "1.1.0",
+  "description": "A handy wrapper for the Web Notifications API",
+  "main": "notify.js",
+  "devDependencies": {
+    "karma": "~0.8.5",
+    "sinon": "~1.7.3"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/karma start --browsers Firefox --single-run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexgibson/notify.js.git"
+  },
+  "keywords": [
+    "web",
+    "notification",
+    "nofity"
+  ],
+  "author": "Alex Gibson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexgibson/notify.js/issues"
+  }
 }

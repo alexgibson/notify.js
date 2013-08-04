@@ -89,6 +89,6 @@ describe('isSupported', function () {
 
     it('should return a boolean', function () {
         var notification = new Notify('foo');
-        expect(notification.isSupported()).toBeTruthy();
+        expect(notification.isSupported()).toBe(true);
     });
 });
