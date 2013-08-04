@@ -2,7 +2,7 @@ describe('instantiation', function () {
 
     it('should create a new Notify instance', function () {
         var notification = new Notify('foo');
-        expect(notification instanceof Notify).toBeTruthy();
+        expect(notification instanceof window.Notify).toBeTruthy();
     });
 
     it('should throw an exception if has no title', function () {
