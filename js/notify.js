@@ -34,7 +34,7 @@
         this.permission = null;
 
 
-        if (!this.isSupported) {
+        if (!this.isSupported()) {
             return;
         }
 
@@ -94,25 +94,41 @@
     };
 
     Notify.prototype.show = function () {
-        if (!this.isSupported) { return; }
-        if (this.permission === 'granted') {
-            this.showNotification();
+        if (!this.isSupported()) { return; }
+
+        if (w.Notification) {
+            if (this.permission !== 'granted') {
+                this.showNotification();
+            } else {
+                this.requestPermission();
+            }
         } else {
-            this.requestPermission();
+            this.showNotification();
         }
     };
 
     Notify.prototype.showNotification = function () {
 
-        this.myNotify = new Notification(this.title, {
-            'body': this.options.body,
-            'tag' : this.options.tag
-        });
+        if (w.Notification) {
+            this.myNotify = new Notification(this.title, {
+                'body': this.options.body,
+                'tag' : this.options.tag,
+                'icon' : this.options.icon
+            });
 
-        this.myNotify.addEventListener('show', this, false);
+            this.myNotify.addEventListener('show', this, false);
+            this.myNotify.addEventListener('error', this, false);
+
+        } else {
+            this.myNotify = navigator.mozNotification.createNotification(
+                this.title,
+                this.options.body
+            );
+            this.myNotify.show();
+        }
+
         this.myNotify.addEventListener('close', this, false);
         this.myNotify.addEventListener('click', this, false);
-        this.myNotify.addEventListener('error', this, false);
     };
 
     Notify.prototype.onShowNotification = function () {
@@ -148,14 +164,16 @@
     };
 
     Notify.prototype.destroy = function () {
-        this.myNotify.removeEventListener('show', this, false);
+        if (w.Notification) {
+            this.myNotify.removeEventListener('show', this, false);
+            this.myNotify.removeEventListener('error', this, false);            
+        }
         this.myNotify.removeEventListener('close', this, false);
         this.myNotify.removeEventListener('click', this, false);
-        this.myNotify.removeEventListener('error', this, false);
     };
 
     Notify.prototype.isSupported = function () {
-        if (w.Notification) {
+        if (w.Notification || 'mozNotification' in navigator) {
             return true;
         }
         return false;
