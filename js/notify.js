@@ -97,7 +97,7 @@
         if (!this.isSupported()) { return; }
 
         if (w.Notification) {
-            if (this.permission !== 'granted') {
+            if (this.permission === 'granted') {
                 this.showNotification();
             } else {
                 this.requestPermission();
