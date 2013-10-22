@@ -78,7 +78,7 @@ npm test
 Browser support
 ---------------------------------------
 
-- Chrome
+- Chrome (desktop)
 - Safari
 - Firefox
 - Firefox OS
