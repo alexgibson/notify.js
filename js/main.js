@@ -3,7 +3,6 @@ define(function(require) {
     'use strict';
 
     var Notify = require('notify');
-    var Visibility = require('visibility');
 
     document.getElementById('my-button').addEventListener('click', function () {
 
