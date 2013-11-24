@@ -3,7 +3,7 @@ Notify.js
 
 [![Build Status](https://travis-ci.org/alexgibson/notify.js.png?branch=master)](https://travis-ci.org/alexgibson/notify.js)
 
-A handy wrapper for using the [Web Notifications API](http://www.w3.org/TR/notifications/). Notify.js automatically handles requesting user permission and associated Web Notification API events, as well as adding a few extra convenience methods.
+A handy wrapper for using the [Web Notifications API](http://www.w3.org/TR/notifications/). Notify.js aims to simplify requesting user permission and associated Web Notification API events, as well as providing a few extra callbacks and convenience methods.
 
 Installation
 ---------------------------------------
@@ -33,7 +33,7 @@ function onNotifyShow() {
 Then show the notification.
 
 ```
-myNotification.show(); 
+myNotification.show();
 ```
 
 Required parameters
@@ -51,13 +51,16 @@ Optional parameters
 * notifyClose: (function) - callback when notification is closed
 * notifyClick: (function) - callback when notification is clicked
 * notifyError: (function) - callback when notification throws an error
+* permissionGranted: (function) - callback when user has granted permission
 * permissionDenied: (function) - callback when user has denied permission
 
-Note: Firefox OS currently supports `notifyClose` and `notifyClick` callbacks only.
+Note: Firefox OS does not currently support `notifyShow` and `notifyError` callbacks, since it uses the slightly older `mozNotification` API.
 
 Useful methods
 --------------
 
+* `needsPermission()` - (returns boolean) check is permission is needed for the user to receive notifications.
+* `requestPermission()` - requests permission from the user if needed and handles permission callbacks.
 * `isSupported()` - (returns boolean) test for Web Notifications API browser support
 
 Testing
@@ -81,5 +84,5 @@ Browser support
 - Chrome (desktop)
 - Safari
 - Firefox
-- Firefox OS
+- Firefox OS (using `mozNotification` API)
 - Firefox Mobile (Android)

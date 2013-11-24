@@ -11,13 +11,15 @@ files = [
   JASMINE,
   JASMINE_ADAPTER,
   'notify.js',
-  'test/*.js'
+  'test/*.js',
+
+  { pattern: 'node_modules/sinon/pkg/sinon.js', watched: false, included: true }
 ];
 
 
 // list of files to exclude
 exclude = [
-  
+
 ];
 
 

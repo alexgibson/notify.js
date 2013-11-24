@@ -4,7 +4,8 @@
   "description": "A handy wrapper for the Web Notifications API",
   "main": "notify.js",
   "devDependencies": {
-    "karma": "~0.8.5"
+    "karma": "~0.8.5",
+    "sinon": "~1.7.3"
   },
   "repository": {
     "type": "git",

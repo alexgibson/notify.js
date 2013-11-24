@@ -14,10 +14,15 @@ describe('instantiation', function () {
 
 describe('permission', function () {
 
+    it('should check if permission is needed', function () {
+        var notification = new Notify('foo');
+        expect(notification.needsPermission()).toBeTruthy();
+    });
+
     it('should request permission from the user', function () {
         var notification = new Notify('foo');
         spyOn(window.Notification, 'requestPermission');
-        notification.show();
+        notification.requestPermission();
         expect(window.Notification.requestPermission).toHaveBeenCalled();
     });
 });
@@ -42,7 +47,7 @@ describe('callbacks', function () {
         var notification = new Notify('foo', {
             notifyClose: callback
         });
-        notification.showNotification();
+        notification.show();
         notification.onCloseNotification();
         expect(callback).toHaveBeenCalled();
     });
@@ -51,7 +56,6 @@ describe('callbacks', function () {
         var notification = new Notify('foo', {
             notifyClick: callback
         });
-        notification.showNotification();
         notification.onClickNotification();
         expect(callback).toHaveBeenCalled();
     });
@@ -60,7 +64,6 @@ describe('callbacks', function () {
         var notification = new Notify('foo', {
             permissionDenied: callback
         });
-        notification.showNotification();
         notification.onPermissionDenied();
         expect(callback).toHaveBeenCalled();
     });
@@ -69,12 +72,28 @@ describe('callbacks', function () {
         var notification = new Notify('foo', {
             notifyError: callback
         });
-        notification.showNotification();
+        notification.show();
         notification.onErrorNotification();
         expect(callback).toHaveBeenCalled();
     });
 
-    it('should call destroy', function () {
+    it('should fire permission granted callback', function () {
+        var notification = new Notify('foo', {
+            permissionGranted: callback
+        });
+        notification.onPermissionGranted();
+        expect(callback).toHaveBeenCalled();
+    });
+
+    it('should fire permission denied callback', function () {
+        var notification = new Notify('foo', {
+            permissionDenied: callback
+        });
+        notification.onPermissionDenied();
+        expect(callback).toHaveBeenCalled();
+    });
+
+    it('should destroy a notification once closed', function () {
         var notification = new Notify('foo', {
             notifyClose: callback
         });

@@ -28,11 +28,11 @@
             notifyClose: null,
             notifyClick: null,
             notifyError: null,
+            permissionGranted: null,
             permissionDenied: null
         };
 
         this.permission = null;
-
 
         if (!this.isSupported()) {
             return;
@@ -71,6 +71,11 @@
                 this.onErrorCallback = this.options.notifyError;
             }
 
+            //callback user grants permission for notification
+            if (typeof this.options.permissionGranted === 'function') {
+                this.onPermissionGrantedCallback = this.options.permissionGranted;
+            }
+
             //callback user denies permission for notification
             if (typeof this.options.permissionDenied === 'function') {
                 this.onPermissionDeniedCallback = this.options.permissionDenied;
@@ -78,13 +83,25 @@
         }
     }
 
+    Notify.prototype.needsPermission = function () {
+        if ('Notification' in w && Notification.permission === 'granted') {
+            return false;
+        }
+        // mozNotification requests permission automatically
+        // so we don't need to handle that in the lib
+        if ('mozNotification' in navigator) {
+            return false;
+        }
+        return true;
+    };
+
     Notify.prototype.requestPermission = function () {
         var that = this;
         w.Notification.requestPermission(function (perm) {
             that.permission = perm;
             switch (that.permission) {
             case 'granted':
-                that.showNotification();
+                that.onPermissionGranted();
                 break;
             case 'denied':
                 that.onPermissionDenied();
@@ -94,22 +111,12 @@
     };
 
     Notify.prototype.show = function () {
-        if (!this.isSupported()) { return; }
 
-        if (w.Notification) {
-            if (this.permission === 'granted') {
-                this.showNotification();
-            } else {
-                this.requestPermission();
-            }
-        } else {
-            this.showNotification();
+        if (!this.isSupported()) {
+            return;
         }
-    };
 
-    Notify.prototype.showNotification = function () {
-
-        if (w.Notification) {
+        if ('Notification' in w) {
             this.myNotify = new Notification(this.title, {
                 'body': this.options.body,
                 'tag' : this.options.tag,
@@ -157,6 +164,12 @@
         this.destroy();
     };
 
+    Notify.prototype.onPermissionGranted = function () {
+        if (this.onPermissionGrantedCallback) {
+            this.onPermissionGrantedCallback();
+        }
+    };
+
     Notify.prototype.onPermissionDenied = function () {
         if (this.onPermissionDeniedCallback) {
             this.onPermissionDeniedCallback();
@@ -164,16 +177,16 @@
     };
 
     Notify.prototype.destroy = function () {
-        if (w.Notification) {
+        if ('Notification' in w) {
             this.myNotify.removeEventListener('show', this, false);
-            this.myNotify.removeEventListener('error', this, false);            
+            this.myNotify.removeEventListener('error', this, false);
         }
         this.myNotify.removeEventListener('close', this, false);
         this.myNotify.removeEventListener('click', this, false);
     };
 
     Notify.prototype.isSupported = function () {
-        if (w.Notification || 'mozNotification' in navigator) {
+        if ('Notification' in w || 'mozNotification' in navigator) {
             return true;
         }
         return false;
