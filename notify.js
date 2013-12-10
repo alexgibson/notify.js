@@ -87,11 +87,6 @@
         if ('Notification' in w && Notification.permission === 'granted') {
             return false;
         }
-        // mozNotification requests permission automatically
-        // so we don't need to handle that in the lib
-        if ('mozNotification' in navigator) {
-            return false;
-        }
         return true;
     };
 
@@ -116,24 +111,14 @@
             return;
         }
 
-        if ('Notification' in w) {
-            this.myNotify = new Notification(this.title, {
-                'body': this.options.body,
-                'tag' : this.options.tag,
-                'icon' : this.options.icon
-            });
+        this.myNotify = new Notification(this.title, {
+            'body': this.options.body,
+            'tag' : this.options.tag,
+            'icon' : this.options.icon
+        });
 
-            this.myNotify.addEventListener('show', this, false);
-            this.myNotify.addEventListener('error', this, false);
-
-        } else {
-            this.myNotify = navigator.mozNotification.createNotification(
-                this.title,
-                this.options.body
-            );
-            this.myNotify.show();
-        }
-
+        this.myNotify.addEventListener('show', this, false);
+        this.myNotify.addEventListener('error', this, false);
         this.myNotify.addEventListener('close', this, false);
         this.myNotify.addEventListener('click', this, false);
     };
@@ -177,16 +162,14 @@
     };
 
     Notify.prototype.destroy = function () {
-        if ('Notification' in w) {
-            this.myNotify.removeEventListener('show', this, false);
-            this.myNotify.removeEventListener('error', this, false);
-        }
+        this.myNotify.removeEventListener('show', this, false);
+        this.myNotify.removeEventListener('error', this, false);
         this.myNotify.removeEventListener('close', this, false);
         this.myNotify.removeEventListener('click', this, false);
     };
 
     Notify.prototype.isSupported = function () {
-        if ('Notification' in w || 'mozNotification' in navigator) {
+        if ('Notification' in w) {
             return true;
         }
         return false;
