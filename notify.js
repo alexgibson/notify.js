@@ -123,9 +123,9 @@
         this.myNotify.addEventListener('click', this, false);
     };
 
-    Notify.prototype.onShowNotification = function () {
+    Notify.prototype.onShowNotification = function (e) {
         if (this.onShowCallback) {
-            this.onShowCallback();
+            this.onShowCallback(e);
         }
     };
 
