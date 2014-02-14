@@ -83,6 +83,44 @@
         }
     }
 
+    // return true if the browser supports HTML5 Notification
+    Notify.isSupported = function () {
+        if ('Notification' in w) {
+            return true;
+        }
+        return false;
+    };
+
+    // returns true if the permission is not granted
+    Notify.needsPermission = function () {
+        if (Notify.isSupported() && Notification.permission === 'granted') {
+            return false;
+        }
+        return true;
+    };
+
+    // asks the user for permission to display notifications.  Then calls the callback functions is supplied.
+    Notify.requestPermission = function (onPermissionGrantedCallback, onPermissionDeniedCallback) {
+        if (Notify.isSupported()) {
+            w.Notification.requestPermission(function (perm) {
+                switch (perm) {
+                    case 'granted':
+                        if (onPermissionGrantedCallback) {
+                            onPermissionGrantedCallback();
+                        }
+                        break;
+                    case 'denied':
+                        if (onPermissionDeniedCallback) {
+                            onPermissionDeniedCallback();
+                        }
+                        break;
+                }
+            });
+        }
+    };
+
+
+
     Notify.prototype.needsPermission = function () {
         if ('Notification' in w && Notification.permission === 'granted') {
             return false;
