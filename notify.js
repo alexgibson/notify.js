@@ -105,12 +105,12 @@
             w.Notification.requestPermission(function (perm) {
                 switch (perm) {
                     case 'granted':
-                        if (onPermissionGrantedCallback) {
+                        if (typeof onPermissionGrantedCallback === 'function') {
                             onPermissionGrantedCallback();
                         }
                         break;
                     case 'denied':
-                        if (onPermissionDeniedCallback) {
+                        if (typeof onPermissionDeniedCallback === 'function') {
                             onPermissionDeniedCallback();
                         }
                         break;
