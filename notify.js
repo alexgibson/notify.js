@@ -34,7 +34,7 @@
 
         this.permission = null;
 
-        if (!this.isSupported()) {
+        if (!Notify.isSupported()) {
             return;
         }
 
@@ -120,32 +120,9 @@
     };
 
 
-
-    Notify.prototype.needsPermission = function () {
-        if ('Notification' in w && Notification.permission === 'granted') {
-            return false;
-        }
-        return true;
-    };
-
-    Notify.prototype.requestPermission = function () {
-        var that = this;
-        w.Notification.requestPermission(function (perm) {
-            that.permission = perm;
-            switch (that.permission) {
-            case 'granted':
-                that.onPermissionGranted();
-                break;
-            case 'denied':
-                that.onPermissionDenied();
-                break;
-            }
-        });
-    };
-
     Notify.prototype.show = function () {
 
-        if (!this.isSupported()) {
+        if (!Notify.isSupported()) {
             return;
         }
 
@@ -204,13 +181,6 @@
         this.myNotify.removeEventListener('error', this, false);
         this.myNotify.removeEventListener('close', this, false);
         this.myNotify.removeEventListener('click', this, false);
-    };
-
-    Notify.prototype.isSupported = function () {
-        if ('Notification' in w) {
-            return true;
-        }
-        return false;
     };
 
     Notify.prototype.handleEvent = function (e) {
