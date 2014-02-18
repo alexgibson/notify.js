@@ -70,16 +70,6 @@
             if (typeof this.options.notifyError === 'function') {
                 this.onErrorCallback = this.options.notifyError;
             }
-
-            //callback user grants permission for notification
-            if (typeof this.options.permissionGranted === 'function') {
-                this.onPermissionGrantedCallback = this.options.permissionGranted;
-            }
-
-            //callback user denies permission for notification
-            if (typeof this.options.permissionDenied === 'function') {
-                this.onPermissionDeniedCallback = this.options.permissionDenied;
-            }
         }
     }
 
@@ -162,18 +152,6 @@
             this.onErrorCallback();
         }
         this.destroy();
-    };
-
-    Notify.prototype.onPermissionGranted = function () {
-        if (this.onPermissionGrantedCallback) {
-            this.onPermissionGrantedCallback();
-        }
-    };
-
-    Notify.prototype.onPermissionDenied = function () {
-        if (this.onPermissionDeniedCallback) {
-            this.onPermissionDeniedCallback();
-        }
     };
 
     Notify.prototype.destroy = function () {
