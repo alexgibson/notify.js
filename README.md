@@ -57,9 +57,9 @@ Optional parameters
 Useful methods
 --------------
 
-* `needsPermission()` - (returns boolean) check is permission is needed for the user to receive notifications.
-* `requestPermission()` - requests permission from the user if needed and handles permission callbacks.
-* `isSupported()` - (returns boolean) test for Web Notifications API browser support
+* `Notify.needsPermission()` - (returns boolean) check is permission is needed for the user to receive notifications.
+* `Notify.requestPermission()` - requests permission from the user if needed and handles permission callbacks.
+* `Notify.isSupported()` - (returns boolean) test for Web Notifications API browser support
 
 A note about Chrome
 -------------------
