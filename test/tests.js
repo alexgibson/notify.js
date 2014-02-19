@@ -67,16 +67,6 @@ describe('callbacks', function () {
         expect(callback).toHaveBeenCalled();
     });
 
-    it('should fire permission granted callback', function () {
-        Notify.requestPermission(callback, null);
-        expect(callback).toHaveBeenCalled();
-    });
-
-    it('should fire permission denied callback', function () {
-        Notify.requestPermission(null, callback);
-        expect(callback).toHaveBeenCalled();
-    });
-
     it('should destroy a notification once closed', function () {
         var notification = new Notify('foo', {
             notifyClose: callback
