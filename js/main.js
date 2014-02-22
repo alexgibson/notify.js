@@ -24,28 +24,30 @@ define(function(require) {
 
         function onPermissionGranted () {
             console.log('Permission has been granted by the user');
-            myNotification.show();
+            doNotification();
         }
 
         function onPermissionDenied () {
             console.warn('Permission has been denied by the user');
         }
 
-        var myNotification = new Notify('Yo dawg!', {
-            body: 'This is an awesome notification',
-            tag: 'My unique id',
-            notifyShow: onShowNotification,
-            notifyClose: onCloseNotification,
-            notifyClick: onClickNotification,
-            notifyError: onErrorNotification,
-            permissionGranted: onPermissionGranted,
-            permissionDenied: onPermissionDenied
-        });
+        function doNotification () {
+            var myNotification = new Notify('Yo dawg!', {
+                body: 'This is an awesome notification',
+                tag: 'My unique id',
+                notifyShow: onShowNotification,
+                notifyClose: onCloseNotification,
+                notifyClick: onClickNotification,
+                notifyError: onErrorNotification
+            });
 
-        if (myNotification.needsPermission()) {
-            myNotification.requestPermission();
-        } else {
             myNotification.show();
+        }
+
+        if (Notify.needsPermission()) {
+            Notify.requestPermission(onPermissionGranted, onPermissionDenied);
+        } else {
+            doNotification();
         }
 
     }, false);

@@ -34,7 +34,7 @@
 
         this.permission = null;
 
-        if (!this.isSupported()) {
+        if (!Notify.isSupported()) {
             return;
         }
 
@@ -70,44 +70,49 @@
             if (typeof this.options.notifyError === 'function') {
                 this.onErrorCallback = this.options.notifyError;
             }
-
-            //callback user grants permission for notification
-            if (typeof this.options.permissionGranted === 'function') {
-                this.onPermissionGrantedCallback = this.options.permissionGranted;
-            }
-
-            //callback user denies permission for notification
-            if (typeof this.options.permissionDenied === 'function') {
-                this.onPermissionDeniedCallback = this.options.permissionDenied;
-            }
         }
     }
 
-    Notify.prototype.needsPermission = function () {
-        if ('Notification' in w && Notification.permission === 'granted') {
+    // return true if the browser supports HTML5 Notification
+    Notify.isSupported = function () {
+        if ('Notification' in w) {
+            return true;
+        }
+        return false;
+    };
+
+    // returns true if the permission is not granted
+    Notify.needsPermission = function () {
+        if (Notify.isSupported() && Notification.permission === 'granted') {
             return false;
         }
         return true;
     };
 
-    Notify.prototype.requestPermission = function () {
-        var that = this;
-        w.Notification.requestPermission(function (perm) {
-            that.permission = perm;
-            switch (that.permission) {
-            case 'granted':
-                that.onPermissionGranted();
-                break;
-            case 'denied':
-                that.onPermissionDenied();
-                break;
-            }
-        });
+    // asks the user for permission to display notifications.  Then calls the callback functions is supplied.
+    Notify.requestPermission = function (onPermissionGrantedCallback, onPermissionDeniedCallback) {
+        if (Notify.isSupported()) {
+            w.Notification.requestPermission(function (perm) {
+                switch (perm) {
+                    case 'granted':
+                        if (typeof onPermissionGrantedCallback === 'function') {
+                            onPermissionGrantedCallback();
+                        }
+                        break;
+                    case 'denied':
+                        if (typeof onPermissionDeniedCallback === 'function') {
+                            onPermissionDeniedCallback();
+                        }
+                        break;
+                }
+            });
+        }
     };
+
 
     Notify.prototype.show = function () {
 
-        if (!this.isSupported()) {
+        if (!Notify.isSupported()) {
             return;
         }
 
@@ -123,9 +128,9 @@
         this.myNotify.addEventListener('click', this, false);
     };
 
-    Notify.prototype.onShowNotification = function () {
+    Notify.prototype.onShowNotification = function (e) {
         if (this.onShowCallback) {
-            this.onShowCallback();
+            this.onShowCallback(e);
         }
     };
 
@@ -149,30 +154,11 @@
         this.destroy();
     };
 
-    Notify.prototype.onPermissionGranted = function () {
-        if (this.onPermissionGrantedCallback) {
-            this.onPermissionGrantedCallback();
-        }
-    };
-
-    Notify.prototype.onPermissionDenied = function () {
-        if (this.onPermissionDeniedCallback) {
-            this.onPermissionDeniedCallback();
-        }
-    };
-
     Notify.prototype.destroy = function () {
         this.myNotify.removeEventListener('show', this, false);
         this.myNotify.removeEventListener('error', this, false);
         this.myNotify.removeEventListener('close', this, false);
         this.myNotify.removeEventListener('click', this, false);
-    };
-
-    Notify.prototype.isSupported = function () {
-        if ('Notification' in w) {
-            return true;
-        }
-        return false;
     };
 
     Notify.prototype.handleEvent = function (e) {
