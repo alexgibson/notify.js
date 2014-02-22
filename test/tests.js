@@ -15,14 +15,12 @@ describe('instantiation', function () {
 describe('permission', function () {
 
     it('should check if permission is needed', function () {
-        var notification = new Notify('foo');
-        expect(notification.needsPermission()).toBeTruthy();
+        expect(Notify.needsPermission()).toBeTruthy();
     });
 
     it('should request permission from the user', function () {
-        var notification = new Notify('foo');
         spyOn(window.Notification, 'requestPermission');
-        notification.requestPermission();
+        Notify.requestPermission();
         expect(window.Notification.requestPermission).toHaveBeenCalled();
     });
 });
@@ -60,36 +58,12 @@ describe('callbacks', function () {
         expect(callback).toHaveBeenCalled();
     });
 
-    it('should fire denied callback', function () {
-        var notification = new Notify('foo', {
-            permissionDenied: callback
-        });
-        notification.onPermissionDenied();
-        expect(callback).toHaveBeenCalled();
-    });
-
     it('should fire error callback', function () {
         var notification = new Notify('foo', {
             notifyError: callback
         });
         notification.show();
         notification.onErrorNotification();
-        expect(callback).toHaveBeenCalled();
-    });
-
-    it('should fire permission granted callback', function () {
-        var notification = new Notify('foo', {
-            permissionGranted: callback
-        });
-        notification.onPermissionGranted();
-        expect(callback).toHaveBeenCalled();
-    });
-
-    it('should fire permission denied callback', function () {
-        var notification = new Notify('foo', {
-            permissionDenied: callback
-        });
-        notification.onPermissionDenied();
         expect(callback).toHaveBeenCalled();
     });
 
