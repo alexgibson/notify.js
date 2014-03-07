@@ -161,6 +161,10 @@
         this.myNotify.removeEventListener('click', this, false);
     };
 
+    Notify.prototype.close = function () {
+        this.myNotify.close();
+    };
+
     Notify.prototype.handleEvent = function (e) {
         switch (e.type) {
         case 'show':
