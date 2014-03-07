@@ -111,6 +111,7 @@
 
 
     Notify.prototype.show = function () {
+        var that = this;
 
         if (!Notify.isSupported()) {
             return;
@@ -121,6 +122,12 @@
             'tag' : this.options.tag,
             'icon' : this.options.icon
         });
+
+        if (this.options.timeout && !isNaN(this.options.timeout)) {
+            setTimeout(function () {
+                that.myNotify.close();
+            }, this.options.timeout * 1000);
+        }
 
         this.myNotify.addEventListener('show', this, false);
         this.myNotify.addEventListener('error', this, false);
