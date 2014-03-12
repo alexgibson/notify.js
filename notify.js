@@ -29,7 +29,8 @@
             notifyClick: null,
             notifyError: null,
             permissionGranted: null,
-            permissionDenied: null
+            permissionDenied: null,
+            timeout: null
         };
 
         this.permission = null;
