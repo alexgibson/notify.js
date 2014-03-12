@@ -88,10 +88,10 @@ describe('timeout', function () {
         var notification = new Notify('foo', {
             timeout: 1
         });
-        spyOn(notification, 'close');
+        spyOn(window.Notification.prototype, 'close');
         notification.show();
-        expect(notification.close).not.toHaveBeenCalled();
+        expect(window.Notification.prototype.close).not.toHaveBeenCalled();
         jasmine.Clock.tick(1000);
-        expect(notification.close).toHaveBeenCalled();
+        expect(window.Notification.prototype.close).toHaveBeenCalled();
     });
 });

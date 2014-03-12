@@ -125,7 +125,7 @@
         });
 
         if (this.options.timeout && !isNaN(this.options.timeout)) {
-            setTimeout(this.close, this.options.timeout * 1000);
+            setTimeout(this.close.bind(this), this.options.timeout * 1000);
         }
 
         this.myNotify.addEventListener('show', this, false);
