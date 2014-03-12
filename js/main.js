@@ -38,7 +38,8 @@ define(function(require) {
                 notifyShow: onShowNotification,
                 notifyClose: onCloseNotification,
                 notifyClick: onClickNotification,
-                notifyError: onErrorNotification
+                notifyError: onErrorNotification,
+                timeout: 10
             });
 
             myNotification.show();
