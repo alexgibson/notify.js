@@ -78,3 +78,20 @@ describe('callbacks', function () {
     });
 });
 
+describe('timeout', function () {
+
+    beforeEach(function () {
+        jasmine.Clock.useMock();
+    });
+
+    it('should close a notification automatically', function () {
+        var notification = new Notify('foo', {
+            timeout: 1
+        });
+        spyOn(notification, 'close');
+        notification.show();
+        expect(notification.close).not.toHaveBeenCalled();
+        jasmine.Clock.tick(1000);
+        expect(notification.close).toHaveBeenCalled();
+    });
+});
