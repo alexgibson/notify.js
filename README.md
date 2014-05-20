@@ -18,6 +18,10 @@ Setup
 
 This component can be used as an AMD module, CommonJS module, or a global.
 
+```
+var Notify = require('notify');
+```
+
 To initialize a web notification create a new `Notify` instance, passing the message `title` as well as any other options you wish to use.
 
 ```
