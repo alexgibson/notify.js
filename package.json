@@ -1,5 +1,5 @@
 {
-  "name": "notify.js",
+  "name": "notifyjs",
   "version": "1.2.1",
   "description": "A handy wrapper for the Web Notifications API",
   "main": "notify.js",
