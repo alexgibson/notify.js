@@ -9,6 +9,7 @@ Installation
 ---------------------------------------
 
 * Download: [zip](https://github.com/alexgibson/notify.js/zipball/master)
+* [NPM](https://www.npmjs.org/): `npm install notifyjs`
 * [Bower](https://github.com/twitter/bower/): `bower install notify.js`
 * Git: `git clone https://github.com/alexgibson/notify.js`
 
