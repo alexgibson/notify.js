@@ -7,18 +7,25 @@
         define('notify', [], function () {
             return factory(root, document);
         });
+    } else if (typeof exports === 'object') {
+        // CommonJS environment
+        module.exports = factory(root, document);
     } else {
         // Browser environment
         root.Notify = factory(root, document);
     }
 
-}(this, function (w, d) {
+}(window, function (w, d) {
 
     'use strict';
 
     function Notify(title, options) {
 
-        this.title = typeof title === 'string' ? title : null;
+        if (typeof title !== 'string') {
+            throw new Error('Notify(): first arg (title) must be a string.');
+        }
+
+        this.title = title;
 
         this.options = {
             icon: '',
@@ -37,10 +44,6 @@
 
         if (!Notify.isSupported()) {
             return;
-        }
-
-        if (!this.title) {
-            throw new Error('Notify(): first arg (title) must be a string.');
         }
 
         //User defined options for notification content
