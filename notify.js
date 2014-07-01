@@ -143,22 +143,22 @@
         }
     };
 
-    Notify.prototype.onCloseNotification = function () {
+    Notify.prototype.onCloseNotification = function (e) {
         if (this.onCloseCallback) {
-            this.onCloseCallback();
+            this.onCloseCallback(e);
         }
         this.destroy();
     };
 
-    Notify.prototype.onClickNotification = function () {
+    Notify.prototype.onClickNotification = function (e) {
         if (this.onClickCallback) {
-            this.onClickCallback();
+            this.onClickCallback(e);
         }
     };
 
-    Notify.prototype.onErrorNotification = function () {
+    Notify.prototype.onErrorNotification = function (e) {
         if (this.onErrorCallback) {
-            this.onErrorCallback();
+            this.onErrorCallback(e);
         }
         this.destroy();
     };
