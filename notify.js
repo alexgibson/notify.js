@@ -91,17 +91,15 @@
 
     // asks the user for permission to display notifications.  Then calls the callback functions is supplied.
     Notify.requestPermission = function (onPermissionGrantedCallback, onPermissionDeniedCallback) {
-
         if (!Notify.isSupported) {
             return;
         }
-
         w.Notification.requestPermission(function (perm) {
-            if (isFunction(onPermissionGrantedCallback)) {
-                onPermissionGrantedCallback();
-            }
             switch (perm) {
                 case 'granted':
+                    if (isFunction(onPermissionGrantedCallback)) {
+                        onPermissionGrantedCallback();
+                    }
                     break;
                 case 'denied':
                     if (isFunction(onPermissionDeniedCallback)) {
