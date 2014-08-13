@@ -84,10 +84,8 @@
     // true if the browser supports HTML5 Notification
     Notify.isSupported = 'Notification' in w;
 
-    // returns true if the permission is not granted
-    Notify.needsPermission = function () {
-        return !(Notify.isSupported && Notification.permission === 'granted');
-    };
+    // true if the permission is not granted
+    Notify.needsPermission = !(Notify.isSupported && Notification.permission === 'granted');
 
     // asks the user for permission to display notifications.  Then calls the callback functions is supplied.
     Notify.requestPermission = function (onPermissionGrantedCallback, onPermissionDeniedCallback) {
@@ -112,7 +110,6 @@
 
 
     Notify.prototype.show = function () {
-        var that = this;
 
         if (!Notify.isSupported) {
             return;
