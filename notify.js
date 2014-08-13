@@ -42,7 +42,7 @@
 
         this.permission = null;
 
-        if (!Notify.isSupported()) {
+        if (!Notify.isSupported) {
             return;
         }
 
@@ -77,17 +77,12 @@
         }
     }
 
-    // return true if the browser supports HTML5 Notification
-    Notify.isSupported = function () {
-        if ('Notification' in w) {
-            return true;
-        }
-        return false;
-    };
+    // true if the browser supports HTML5 Notification
+    Notify.isSupported = 'Notification' in w;
 
     // returns true if the permission is not granted
     Notify.needsPermission = function () {
-        if (Notify.isSupported() && Notification.permission === 'granted') {
+        if (Notify.isSupported && Notification.permission === 'granted') {
             return false;
         }
         return true;
@@ -95,7 +90,7 @@
 
     // asks the user for permission to display notifications.  Then calls the callback functions is supplied.
     Notify.requestPermission = function (onPermissionGrantedCallback, onPermissionDeniedCallback) {
-        if (Notify.isSupported()) {
+        if (Notify.isSupported) {
             w.Notification.requestPermission(function (perm) {
                 switch (perm) {
                     case 'granted':
@@ -117,7 +112,7 @@
     Notify.prototype.show = function () {
         var that = this;
 
-        if (!Notify.isSupported()) {
+        if (!Notify.isSupported) {
             return;
         }
 
