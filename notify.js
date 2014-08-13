@@ -19,6 +19,10 @@
 
     'use strict';
 
+    function isFunction (item) {
+        return typeof item === 'function';
+    }
+
     function Notify(title, options) {
 
         if (typeof title !== 'string') {
@@ -56,22 +60,22 @@
             }
 
             //callback when notification is displayed
-            if (typeof this.options.notifyShow === 'function') {
+            if (isFunction(this.options.notifyShow)) {
                 this.onShowCallback = this.options.notifyShow;
             }
 
             //callback when notification is closed
-            if (typeof this.options.notifyClose === 'function') {
+            if (isFunction(this.options.notifyClose)) {
                 this.onCloseCallback = this.options.notifyClose;
             }
 
             //callback when notification is clicked
-            if (typeof this.options.notifyClick === 'function') {
+            if (isFunction(this.options.notifyClick)) {
                 this.onClickCallback = this.options.notifyClick;
             }
 
             //callback when notification throws error
-            if (typeof this.options.notifyError === 'function') {
+            if (isFunction(this.options.notifyError)) {
                 this.onErrorCallback = this.options.notifyError;
             }
         }
@@ -91,12 +95,12 @@
             w.Notification.requestPermission(function (perm) {
                 switch (perm) {
                     case 'granted':
-                        if (typeof onPermissionGrantedCallback === 'function') {
+                        if (isFunction(onPermissionGrantedCallback)) {
                             onPermissionGrantedCallback();
                         }
                         break;
                     case 'denied':
-                        if (typeof onPermissionDeniedCallback === 'function') {
+                        if (isFunction(onPermissionDeniedCallback)) {
                             onPermissionDeniedCallback();
                         }
                         break;
