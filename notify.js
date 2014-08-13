@@ -82,10 +82,7 @@
 
     // returns true if the permission is not granted
     Notify.needsPermission = function () {
-        if (Notify.isSupported && Notification.permission === 'granted') {
-            return false;
-        }
-        return true;
+        return !(Notify.isSupported && Notification.permission === 'granted');
     };
 
     // asks the user for permission to display notifications.  Then calls the callback functions is supplied.
