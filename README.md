@@ -66,12 +66,12 @@ Optional parameters
 * permissionGranted: (function) - callback when user has granted permission
 * permissionDenied: (function) - callback when user has denied permission
 
-Useful methods
---------------
+Static methods and properties
+-----------------------------
 
-* `Notify.needsPermission()` - (returns boolean) check is permission is needed for the user to receive notifications.
 * `Notify.requestPermission()` - requests permission from the user if needed and handles permission callbacks.
-* `Notify.isSupported()` - (returns boolean) test for Web Notifications API browser support
+* `Notify.isSupported` - Boolean property to test for Web Notifications API browser support
+* `Notify.needsPermission` - Boolean property to check if permission is needed for the user to receive notifications.
 
 A note about Chrome
 -------------------
