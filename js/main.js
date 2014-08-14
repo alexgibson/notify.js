@@ -39,13 +39,13 @@ define(function(require) {
                 notifyClose: onCloseNotification,
                 notifyClick: onClickNotification,
                 notifyError: onErrorNotification,
-                timeout: 10
+                timeout: 4
             });
 
             myNotification.show();
         }
 
-        if (Notify.needsPermission()) {
+        if (Notify.needsPermission) {
             Notify.requestPermission(onPermissionGranted, onPermissionDenied);
         } else {
             doNotification();
