@@ -15,7 +15,7 @@ describe('instantiation', function () {
 describe('permission', function () {
 
     it('should check if permission is needed', function () {
-        expect(Notify.needsPermission()).toBeTruthy();
+        expect(typeof Notify.needsPermission).toBe('boolean');
     });
 
     it('should request permission from the user', function () {

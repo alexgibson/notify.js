@@ -19,6 +19,10 @@
 
     'use strict';
 
+    function isFunction (item) {
+        return typeof item === 'function';
+    }
+
     function Notify(title, options) {
 
         if (typeof title !== 'string') {
@@ -42,7 +46,7 @@
 
         this.permission = null;
 
-        if (!Notify.isSupported()) {
+        if (!Notify.isSupported) {
             return;
         }
 
@@ -56,68 +60,58 @@
             }
 
             //callback when notification is displayed
-            if (typeof this.options.notifyShow === 'function') {
+            if (isFunction(this.options.notifyShow)) {
                 this.onShowCallback = this.options.notifyShow;
             }
 
             //callback when notification is closed
-            if (typeof this.options.notifyClose === 'function') {
+            if (isFunction(this.options.notifyClose)) {
                 this.onCloseCallback = this.options.notifyClose;
             }
 
             //callback when notification is clicked
-            if (typeof this.options.notifyClick === 'function') {
+            if (isFunction(this.options.notifyClick)) {
                 this.onClickCallback = this.options.notifyClick;
             }
 
             //callback when notification throws error
-            if (typeof this.options.notifyError === 'function') {
+            if (isFunction(this.options.notifyError)) {
                 this.onErrorCallback = this.options.notifyError;
             }
         }
     }
 
-    // return true if the browser supports HTML5 Notification
-    Notify.isSupported = function () {
-        if ('Notification' in w) {
-            return true;
-        }
-        return false;
-    };
+    // true if the browser supports HTML5 Notification
+    Notify.isSupported = 'Notification' in w;
 
-    // returns true if the permission is not granted
-    Notify.needsPermission = function () {
-        if (Notify.isSupported() && Notification.permission === 'granted') {
-            return false;
-        }
-        return true;
-    };
+    // true if the permission is not granted
+    Notify.needsPermission = !(Notify.isSupported && Notification.permission === 'granted');
 
     // asks the user for permission to display notifications.  Then calls the callback functions is supplied.
     Notify.requestPermission = function (onPermissionGrantedCallback, onPermissionDeniedCallback) {
-        if (Notify.isSupported()) {
-            w.Notification.requestPermission(function (perm) {
-                switch (perm) {
-                    case 'granted':
-                        if (typeof onPermissionGrantedCallback === 'function') {
-                            onPermissionGrantedCallback();
-                        }
-                        break;
-                    case 'denied':
-                        if (typeof onPermissionDeniedCallback === 'function') {
-                            onPermissionDeniedCallback();
-                        }
-                        break;
-                }
-            });
+        if (!Notify.isSupported) {
+            return;
         }
+        w.Notification.requestPermission(function (perm) {
+            switch (perm) {
+                case 'granted':
+                    if (isFunction(onPermissionGrantedCallback)) {
+                        onPermissionGrantedCallback();
+                    }
+                    break;
+                case 'denied':
+                    if (isFunction(onPermissionDeniedCallback)) {
+                        onPermissionDeniedCallback();
+                    }
+                    break;
+            }
+        });
     };
 
 
     Notify.prototype.show = function () {
-        var that = this;
 
-        if (!Notify.isSupported()) {
+        if (!Notify.isSupported) {
             return;
         }
 
