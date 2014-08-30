@@ -95,6 +95,7 @@
         w.Notification.requestPermission(function (perm) {
             switch (perm) {
                 case 'granted':
+                    Notify.needsPermission = false;
                     if (isFunction(onPermissionGrantedCallback)) {
                         onPermissionGrantedCallback();
                     }

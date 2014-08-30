@@ -23,6 +23,22 @@ describe('permission', function () {
         Notify.requestPermission();
         expect(window.Notification.requestPermission).toHaveBeenCalled();
     });
+
+    it('should update Notify.needsPermission to true if the user accepts the request', function () {
+        spyOn(window.Notification, 'requestPermission').andCallFake(function (cb) {
+            cb('granted');
+        });
+
+        runs(Notify.requestPermission);
+
+        waitsFor(function () {
+            return Notify.needsPermission === false;
+        }, 'Notify.needsPermission to be false', 750);
+
+        runs(function () {
+            expect(Notify.needsPermission).toBe(false);
+        });
+    });
 });
 
 describe('callbacks', function () {
