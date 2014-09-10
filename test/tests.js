@@ -24,7 +24,7 @@ describe('permission', function () {
         expect(window.Notification.requestPermission).toHaveBeenCalled();
     });
 
-    it('should update Notify.needsPermission to true if the user accepts the request', function () {
+    it('should update Notify.needsPermission to false if the user accepts the request', function () {
         spyOn(window.Notification, 'requestPermission').andCallFake(function (cb) {
             cb('granted');
         });
