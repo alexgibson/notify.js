@@ -77,7 +77,7 @@ Static methods and properties
 A note about Chrome
 -------------------
 
-Unlike other browsers that implement the Web Notification API, Chrome does not permit requesting permission on page load (it must be as a result of user interaction, such as a `click` event). You can find out more in the [Chromium bug for this issue](https://code.google.com/p/chromium/issues/detail?id=274284).
+Prior to Chrome v37, `Notification.requestPermission` could not be called on page load events, it required a user interaction such as a `click` event. This has been fixed in current versions to be more consistent with other browsers, but please keep this in mind when writing your application. You can find out more in the [Chromium bug for this issue](https://code.google.com/p/chromium/issues/detail?id=274284).
 
 Testing
 -------
