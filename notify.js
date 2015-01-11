@@ -1,21 +1,23 @@
-(function (root, factory) {
+/*
+ * Author: Alex Gibson
+ * https://github.com/alexgibson/notify.js
+ * License: MIT license
+ */
 
-    'use strict';
-
+(function(global, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD environment
-        define('notify', [], function () {
-            return factory(root, document);
+        define(function() {
+            return factory(global, global.document);
         });
-    } else if (typeof exports === 'object') {
+    } else if (typeof module !== 'undefined' && module.exports) {
         // CommonJS environment
-        module.exports = factory(root, document);
+        module.exports = factory(global, global.document);
     } else {
         // Browser environment
-        root.Notify = factory(root, document);
+        global.Shake = factory(global, global.document);
     }
-
-}(window, function (w, d) {
+} (typeof window !== 'undefined' ? window : this, function (w, d) {
 
     'use strict';
 

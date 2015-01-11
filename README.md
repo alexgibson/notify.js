@@ -20,7 +20,10 @@ This component can be used as an AMD module, CommonJS module, or a global.
 
 ### for AMD module:
 ```
-var Notify = require('notify');
+define(['./notify'], function(Notify) {
+     var myNotification = new Notify();
+    // ...
+});
 ```
 
 ### for CommonJS:
