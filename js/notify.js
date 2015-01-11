@@ -1,21 +1,23 @@
-(function (root, factory) {
+/*
+ * Author: Alex Gibson
+ * https://github.com/alexgibson/notify.js
+ * License: MIT license
+ */
 
-    'use strict';
-
+(function(global, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD environment
-        define('notify', [], function () {
-            return factory(root, document);
+        define(function() {
+            return factory(global, global.document);
         });
-    } else if (typeof exports === 'object') {
+    } else if (typeof module !== 'undefined' && module.exports) {
         // CommonJS environment
-        module.exports = factory(root, document);
+        module.exports = factory(global, global.document);
     } else {
         // Browser environment
-        root.Notify = factory(root, document);
+        global.Shake = factory(global, global.document);
     }
-
-}(window, function (w, d) {
+} (typeof window !== 'undefined' ? window : this, function (w, d) {
 
     'use strict';
 
@@ -87,6 +89,9 @@
     // true if the permission is not granted
     Notify.needsPermission = !(Notify.isSupported && Notification.permission === 'granted');
 
+    // returns current permission level ('granted', 'default', 'denied' or null)
+    Notify.permissionLevel = (Notify.isSupported ? Notification.permission : null);
+
     // asks the user for permission to display notifications.  Then calls the callback functions is supplied.
     Notify.requestPermission = function (onPermissionGrantedCallback, onPermissionDeniedCallback) {
         if (!Notify.isSupported) {
@@ -95,6 +100,7 @@
         w.Notification.requestPermission(function (perm) {
             switch (perm) {
                 case 'granted':
+                    Notify.needsPermission = false;
                     if (isFunction(onPermissionGrantedCallback)) {
                         onPermissionGrantedCallback();
                     }

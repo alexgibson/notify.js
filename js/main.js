@@ -1,8 +1,6 @@
-define(function(require) {
+define(['./notify'], function(Notify) {
 
     'use strict';
-
-    var Notify = require('notify');
 
     document.getElementById('my-button').addEventListener('click', function () {
 
