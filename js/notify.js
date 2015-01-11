@@ -15,7 +15,7 @@
         module.exports = factory(global, global.document);
     } else {
         // Browser environment
-        global.Shake = factory(global, global.document);
+        global.Notify = factory(global, global.document);
     }
 } (typeof window !== 'undefined' ? window : this, function (w, d) {
 
