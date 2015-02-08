@@ -5,6 +5,8 @@ Notify.js
 
 A handy wrapper for using the [Web Notifications API](http://www.w3.org/TR/notifications/). Notify.js aims to simplify requesting user permission and associated Web Notification API events, as well as providing a few extra callbacks and convenience methods.
 
+[Online demo](http://alxgbsn.co.uk/notify.js/)
+
 Installation
 ---------------------------------------
 
