@@ -66,8 +66,6 @@ Optional parameters
 * notifyClose: (function) - callback when notification is closed
 * notifyClick: (function) - callback when notification is clicked
 * notifyError: (function) - callback when notification throws an error
-* permissionGranted: (function) - callback when user has granted permission
-* permissionDenied: (function) - callback when user has denied permission
 
 Static methods and properties
 -----------------------------
