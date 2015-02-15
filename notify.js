@@ -41,8 +41,6 @@
             notifyClose: null,
             notifyClick: null,
             notifyError: null,
-            permissionGranted: null,
-            permissionDenied: null,
             timeout: null
         };
 
