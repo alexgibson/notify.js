@@ -46,10 +46,23 @@ function onNotifyShow() {
 }
 ```
 
-Then show the notification.
+Then show the notification.  It's a good idea to make sure that you have permissions to send notifications first.
 
 ```
-myNotification.show();
+if (Notify.needsPermission) {
+	Notify.requestPermission(onPermissionGranted, onPermissionDenied);
+} else {
+	myNotification.show();
+}
+
+function onPermissionGranted() {
+	console.log('Permission has been granted by the user');
+	myNotification.show();
+}
+
+function onPermissionDenied() {
+	console.warn('Permission has been denied by the user');
+}
 ```
 
 Required parameters
