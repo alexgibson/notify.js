@@ -76,6 +76,7 @@ Optional parameters
 * body: (string) - notification message body
 * icon: (string) - path for icon to display in notification
 * tag: (string) - unique identifier to stop duplicate notifications
+* lang: (string) - BCP 47 language tag for the notification (default: `en`)
 * timeout: (integer) - number of seconds to close the notification automatically
 * notifyShow: (function) - callback when notification is shown
 * notifyClose: (function) - callback when notification is closed

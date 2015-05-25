@@ -37,6 +37,7 @@
             icon: '',
             body: '',
             tag: '',
+            lang: 'en',
             notifyShow: null,
             notifyClose: null,
             notifyClick: null,
@@ -122,7 +123,8 @@
         this.myNotify = new Notification(this.title, {
             'body': this.options.body,
             'tag' : this.options.tag,
-            'icon' : this.options.icon
+            'icon' : this.options.icon,
+            'lang' : this.options.lang
         });
 
         if (this.options.timeout && !isNaN(this.options.timeout)) {
