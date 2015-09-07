@@ -5,6 +5,8 @@
  */
 
 (function(global, factory) {
+    'use strict';
+
     if (typeof define === 'function' && define.amd) {
         // AMD environment
         define(function() {
@@ -18,10 +20,9 @@
         global.Notify = factory(global, global.document);
     }
 } (typeof window !== 'undefined' ? window : this, function (w, d) {
-
     'use strict';
 
-    function isFunction (item) {
+    function isFunction(item) {
         return typeof item === 'function';
     }
 
@@ -82,21 +83,41 @@
         }
     }
 
-    // true if the browser supports HTML5 Notification
-    Notify.isSupported = 'Notification' in w;
+    // returns true if the browser supports Web Notifications
+    Notify.isSupported = function() {
+        if (!window.Notification || !Notification.requestPermission) {
+            return false;
+        }
+
+        if (Notification.permission === 'granted') {
+            // We would only have prompted the user for permission if new
+            // Notification was supported, so assume it is supported.
+            return true;
+        }
+
+        // https://developers.google.com/web/updates/2015/05/Notifying-you-of-notificiation-changes
+        try {
+            new Notification('');
+        } catch (e) {
+            if (e.name === 'TypeError') {
+                return false;
+            }
+        }
+        return true;
+    };
 
     // true if the permission is not granted
-    Notify.needsPermission = !(Notify.isSupported && Notification.permission === 'granted');
+    Notify.needsPermission = !(Notify.isSupported() && Notification.permission === 'granted');
 
     // returns current permission level ('granted', 'default', 'denied' or null)
-    Notify.permissionLevel = (Notify.isSupported ? Notification.permission : null);
+    Notify.permissionLevel = (Notify.isSupported() ? Notification.permission : null);
 
     // asks the user for permission to display notifications.  Then calls the callback functions is supplied.
-    Notify.requestPermission = function (onPermissionGrantedCallback, onPermissionDeniedCallback) {
-        if (!Notify.isSupported) {
+    Notify.requestPermission = function(onPermissionGrantedCallback, onPermissionDeniedCallback) {
+        if (!Notify.isSupported()) {
             return;
         }
-        w.Notification.requestPermission(function (perm) {
+        w.Notification.requestPermission(function(perm) {
             switch (perm) {
                 case 'granted':
                     Notify.needsPermission = false;
@@ -114,9 +135,8 @@
     };
 
 
-    Notify.prototype.show = function () {
-
-        if (!Notify.isSupported) {
+    Notify.prototype.show = function() {
+        if (!Notify.isSupported()) {
             return;
         }
 
@@ -137,44 +157,44 @@
         this.myNotify.addEventListener('click', this, false);
     };
 
-    Notify.prototype.onShowNotification = function (e) {
+    Notify.prototype.onShowNotification = function(e) {
         if (this.onShowCallback) {
             this.onShowCallback(e);
         }
     };
 
-    Notify.prototype.onCloseNotification = function (e) {
+    Notify.prototype.onCloseNotification = function(e) {
         if (this.onCloseCallback) {
             this.onCloseCallback(e);
         }
         this.destroy();
     };
 
-    Notify.prototype.onClickNotification = function (e) {
+    Notify.prototype.onClickNotification = function(e) {
         if (this.onClickCallback) {
             this.onClickCallback(e);
         }
     };
 
-    Notify.prototype.onErrorNotification = function (e) {
+    Notify.prototype.onErrorNotification = function(e) {
         if (this.onErrorCallback) {
             this.onErrorCallback(e);
         }
         this.destroy();
     };
 
-    Notify.prototype.destroy = function () {
+    Notify.prototype.destroy = function() {
         this.myNotify.removeEventListener('show', this, false);
         this.myNotify.removeEventListener('error', this, false);
         this.myNotify.removeEventListener('close', this, false);
         this.myNotify.removeEventListener('click', this, false);
     };
 
-    Notify.prototype.close = function () {
+    Notify.prototype.close = function() {
         this.myNotify.close();
     };
 
-    Notify.prototype.handleEvent = function (e) {
+    Notify.prototype.handleEvent = function(e) {
         switch (e.type) {
         case 'show':
             this.onShowNotification(e);
@@ -192,5 +212,4 @@
     };
 
     return Notify;
-
 }));

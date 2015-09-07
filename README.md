@@ -87,7 +87,7 @@ Static methods and properties
 -----------------------------
 
 * `Notify.requestPermission(onPermissionGrantedCallback, onPermissionDeniedCallback)` - requests permission from the user if needed and handles permission callbacks.
-* `Notify.isSupported` - Boolean property to test for Web Notifications API browser support
+* `Notify.isSupported()` - Feature detect for Web Notifications API browser support
 * `Notify.needsPermission` - Boolean property to check if permission is needed for the user to receive notifications.
 * `Notify.permissionLevel` - shows the user's current permission level (granted, denied or default), returns null if notifications are not supported.
 
