@@ -48,7 +48,7 @@
 
         this.permission = null;
 
-        if (!Notify.isSupported) {
+        if (!Notify.isSupported()) {
             return;
         }
 
