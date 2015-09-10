@@ -4,8 +4,11 @@
   "description": "A handy wrapper for the Web Notifications API",
   "main": "notify.js",
   "devDependencies": {
-    "karma": "~0.8.5",
-    "sinon": "~1.7.3"
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.13.9",
+    "karma-firefox-launcher": "^0.1.6",
+    "karma-jasmine": "^0.3.6",
+    "sinon": "^1.16.1"
   },
   "repository": {
     "type": "git",
