@@ -16,9 +16,32 @@ describe('instantiation', function() {
     });
 });
 
+describe('isSupported', function() {
+    'use strict';
+
+    afterEach(function() {
+        Notify.permissionLevel = Notification.permission;
+    });
+
+    it('should return true when notifications are supported', function() {
+        expect(Notify.isSupported()).toBeTruthy();
+    });
+
+    it('should throw an error if permission has already been granted', function() {
+        Notify.permissionLevel = 'granted';
+        expect(function() {
+            Notify.isSupported();
+        }).toThrow();
+    });
+});
+
 describe('permission', function() {
 
     'use strict';
+
+    afterEach(function() {
+        Notify.permissionLevel = Notification.permission;
+    });
 
     it('should check if permission is needed', function() {
         expect(typeof Notify.needsPermission).toBe('boolean');
@@ -30,17 +53,35 @@ describe('permission', function() {
         expect(window.Notification.requestPermission).toHaveBeenCalled();
     });
 
-    describe('needsPermission', function() {
+    describe('requestPermission (granted)', function() {
         beforeEach(function(done) {
             spyOn(window.Notification, 'requestPermission').and.callFake(function(cb) {
                 cb('granted');
+                done();
             });
-            Notify.needsPermission = true;
-            Notify.requestPermission(done);
+            Notify.permissionLevel = 'default';
+            Notify.requestPermission();
         });
 
-        it('should update Notify.needsPermission to false if the user accepts the request', function() {
-            expect(Notify.needsPermission).toBe(false);
+        it('should update permissionLevel and needsPermission if the user accepts the request', function() {
+            expect(Notify.permissionLevel).toBe('granted');
+            expect(Notify.needsPermission).toBeFalsy();
+        });
+    });
+
+    describe('requestPermission (denied)', function() {
+        beforeEach(function(done) {
+            spyOn(window.Notification, 'requestPermission').and.callFake(function(cb) {
+                cb('denied');
+                done();
+            });
+            Notify.permissionLevel = 'default';
+            Notify.requestPermission();
+        });
+
+        it('should update permissionLevel and needsPermission if the user rejects the request', function() {
+            expect(Notify.permissionLevel).toBe('denied');
+            expect(Notify.needsPermission).toBeTruthy();
         });
     });
 });

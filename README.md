@@ -89,20 +89,15 @@ Static methods and properties
 * `Notify.requestPermission(onPermissionGrantedCallback, onPermissionDeniedCallback)` - requests permission from the user if needed and handles permission callbacks.
 * `Notify.isSupported` - Boolean property to test for Web Notifications API browser support
 * `Notify.needsPermission` - Boolean property to check if permission is needed for the user to receive notifications.
-* `Notify.permissionLevel` - shows the user's current permission level (granted, denied or default), returns null if notifications are not supported.
-
-A note about Chrome
--------------------
-
-Prior to Chrome v37, `Notification.requestPermission` could not be called on page load events, it required a user interaction such as a `click` event. This has been fixed in current versions to be more consistent with other browsers, but please keep this in mind when writing your application. You can find out more in the [Chromium bug for this issue](https://code.google.com/p/chromium/issues/detail?id=274284).
+* `Notify.permissionLevel` - shows the user's current permission level (granted, denied, default or unsupported).
 
 Testing
 -------
 
-Install [Node](http://nodejs.org). Testing relies on the Karma test-runner, which can be installed globally using the following command.
+Install [Node](http://nodejs.org). Testing relies on the Karma test-runner, which can be installed by running the following command from the project root:
 
 ```
-npm install -g karma
+npm install
 ```
 
 In the project root, to perform a single pass of the tests using Firefox run:
