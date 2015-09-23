@@ -19,18 +19,13 @@ describe('instantiation', function() {
 describe('isSupported', function() {
     'use strict';
 
-    afterEach(function() {
-        Notify.permissionLevel = Notification.permission;
-    });
-
     it('should return true when notifications are supported', function() {
         expect(Notify.isSupported()).toBeTruthy();
     });
 
     it('should throw an error if permission has already been granted', function() {
-        Notify.permissionLevel = 'granted';
         expect(function() {
-            Notify.isSupported();
+            Notify.isSupported('granted');
         }).toThrow();
     });
 });
@@ -59,12 +54,10 @@ describe('permission', function() {
                 cb('granted');
                 done();
             });
-            Notify.permissionLevel = 'default';
             Notify.requestPermission();
         });
 
         it('should update permissionLevel and needsPermission if the user accepts the request', function() {
-            expect(Notify.permissionLevel).toBe('granted');
             expect(Notify.needsPermission).toBeFalsy();
         });
     });
@@ -75,12 +68,10 @@ describe('permission', function() {
                 cb('denied');
                 done();
             });
-            Notify.permissionLevel = 'default';
             Notify.requestPermission();
         });
 
         it('should update permissionLevel and needsPermission if the user rejects the request', function() {
-            expect(Notify.permissionLevel).toBe('denied');
             expect(Notify.needsPermission).toBeTruthy();
         });
     });

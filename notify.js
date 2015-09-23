@@ -81,13 +81,13 @@
 
     // returns true if the browser supports Web Notifications
     // https://developers.google.com/web/updates/2015/05/Notifying-you-of-notificiation-changes
-    Notify.isSupported = function() {
+    // @param {perm} for test purposes only
+    Notify.isSupported = function(perm) {
         if (!window.Notification || !Notification.requestPermission) {
-            Notify.permissionLevel = 'unsupported';
             return false;
         }
 
-        if (Notify.permissionLevel === 'granted') {
+        if (perm === 'granted' || Notification.permission === 'granted') {
             throw new Error('You must only call this before calling Notification.requestPermission(), otherwise this feature detect would trigger an actual notification!');
         }
 
@@ -95,18 +95,14 @@
             new Notification('');
         } catch (e) {
             if (e.name === 'TypeError') {
-                Notify.permissionLevel = 'unsupported';
                 return false;
             }
         }
         return true;
     };
 
-    // 'granted', 'default', 'denied', 'unsupported'
-    Notify.permissionLevel = Notification.permission;
-
     // true if the permission is not granted
-    Notify.needsPermission = Notification.permissionLevel === 'granted' ? false : true;
+    Notify.needsPermission = (Notification.permission === 'granted') ? false : true;
 
     // asks the user for permission to display notifications.  Then calls the callback functions is supplied.
     Notify.requestPermission = function(onPermissionGrantedCallback, onPermissionDeniedCallback) {
@@ -125,7 +121,6 @@
                     }
                     break;
             }
-            Notify.permissionLevel = perm;
         });
     };
 
