@@ -49,10 +49,10 @@ function onNotifyShow() {
 Then show the notification.  It's a good idea to make sure that you have permissions to send notifications first.
 
 ```
-if (Notify.needsPermission) {
-	Notify.requestPermission(onPermissionGranted, onPermissionDenied);
-} else {
-	myNotification.show();
+if (window.Notification && !Notify.needsPermission) {
+    doNotification();
+} else if (Notify.isSupported()) {
+    Notify.requestPermission(onPermissionGranted, onPermissionDenied);
 }
 
 function onPermissionGranted() {
@@ -87,9 +87,8 @@ Static methods and properties
 -----------------------------
 
 * `Notify.requestPermission(onPermissionGrantedCallback, onPermissionDeniedCallback)` - requests permission from the user if needed and handles permission callbacks.
-* `Notify.isSupported` - Boolean property to test for Web Notifications API browser support
+* `Notify.isSupported` - Function to test for Web Notifications API browser support
 * `Notify.needsPermission` - Boolean property to check if permission is needed for the user to receive notifications.
-* `Notify.permissionLevel` - shows the user's current permission level (granted, denied, default or unsupported).
 
 Testing
 -------
