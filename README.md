@@ -49,7 +49,7 @@ function onNotifyShow() {
 Then show the notification.  It's a good idea to make sure that you have permissions to send notifications first.
 
 ```
-if (window.Notification && !Notify.needsPermission) {
+if (!Notify.needsPermission) {
     doNotification();
 } else if (Notify.isSupported()) {
     Notify.requestPermission(onPermissionGranted, onPermissionDenied);
@@ -73,15 +73,15 @@ Required parameters
 Optional parameters
 -------------------
 
-* body: (string) - notification message body
-* icon: (string) - path for icon to display in notification
-* tag: (string) - unique identifier to stop duplicate notifications
-* lang: (string) - BCP 47 language tag for the notification (default: `en`)
-* timeout: (integer) - number of seconds to close the notification automatically
-* notifyShow: (function) - callback when notification is shown
-* notifyClose: (function) - callback when notification is closed
-* notifyClick: (function) - callback when notification is clicked
-* notifyError: (function) - callback when notification throws an error
+* `body`: (string) - notification message body
+* `icon`: (string) - path for icon to display in notification
+* `tag`: (string) - unique identifier to stop duplicate notifications
+* `lang`: (string) - BCP 47 language tag for the notification (default: `en`)
+* `timeout`: (integer) - number of seconds to close the notification automatically
+* `notifyShow`: (function) - callback when notification is shown
+* `notifyClose`: (function) - callback when notification is closed
+* `notifyClick`: (function) - callback when notification is clicked
+* `notifyError`: (function) - callback when notification throws an error
 
 Static methods and properties
 -----------------------------
@@ -103,6 +103,15 @@ In the project root, to perform a single pass of the tests using Firefox run:
 
 ```
 npm test
+```
+
+Demo
+----
+
+An easy way to run the provided demo file is to use python `SimpleHTTPServer` and then navigate to the `/example` directory:
+
+```
+python -m SimpleHTTPServer
 ```
 
 Browser support
