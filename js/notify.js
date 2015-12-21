@@ -22,6 +22,8 @@
 } (typeof window !== 'undefined' ? window : this, function (w, d) {
     'use strict';
 
+    var N = w.Notification;
+
     function isFunction(item) {
         return typeof item === 'function';
     }
@@ -83,16 +85,16 @@
     // https://developers.google.com/web/updates/2015/05/Notifying-you-of-notificiation-changes
     // @param {perm} for test purposes only
     Notify.isSupported = function(perm) {
-        if (!window.Notification || !Notification.requestPermission) {
+        if (!N || !N.requestPermission) {
             return false;
         }
 
-        if (perm === 'granted' || Notification.permission === 'granted') {
+        if (perm === 'granted' || N.permission === 'granted') {
             throw new Error('You must only call this before calling Notification.requestPermission(), otherwise this feature detect would trigger an actual notification!');
         }
 
         try {
-            new Notification('');
+            new N('');
         } catch (e) {
             if (e.name === 'TypeError') {
                 return false;
@@ -102,11 +104,11 @@
     };
 
     // true if the permission is not granted
-    Notify.needsPermission = (Notification.permission === 'granted') ? false : true;
+    Notify.needsPermission = (N && N.permission && N.permission === 'granted') ? false : true;
 
     // asks the user for permission to display notifications.  Then calls the callback functions is supplied.
     Notify.requestPermission = function(onPermissionGrantedCallback, onPermissionDeniedCallback) {
-        w.Notification.requestPermission(function(perm) {
+        N.requestPermission(function(perm) {
             switch (perm) {
                 case 'granted':
                     Notify.needsPermission = false;
@@ -126,7 +128,7 @@
 
 
     Notify.prototype.show = function() {
-        this.myNotify = new Notification(this.title, {
+        this.myNotify = new N(this.title, {
             'body': this.options.body,
             'tag' : this.options.tag,
             'icon' : this.options.icon,

@@ -65,7 +65,7 @@ button {
                 myNotification.show();
             }
 
-            if (window.Notification && !Notify.needsPermission) {
+            if (!Notify.needsPermission) {
                 doNotification();
             } else if (Notify.isSupported()) {
                 Notify.requestPermission(onPermissionGranted, onPermissionDenied);
