@@ -45,7 +45,9 @@
             notifyClose: null,
             notifyClick: null,
             notifyError: null,
-            timeout: null
+            timeout: null,
+            requireInteraction: false,
+            closeOnClick: false
         };
 
         this.permission = null;
@@ -130,12 +132,14 @@
     Notify.prototype.show = function() {
         this.myNotify = new N(this.title, {
             'body': this.options.body,
-            'tag' : this.options.tag,
-            'icon' : this.options.icon,
-            'lang' : this.options.lang
+            'tag': this.options.tag,
+            'icon': this.options.icon,
+            'lang': this.options.lang,
+            'requireInteraction': this.options.requireInteraction,
+            'closeOnClick': this.options.closeOnClick
         });
 
-        if (this.options.timeout && !isNaN(this.options.timeout)) {
+        if (!this.options.requireInteraction && this.options.timeout && !isNaN(this.options.timeout)) {
             setTimeout(this.close.bind(this), this.options.timeout * 1000);
         }
 
@@ -161,6 +165,10 @@
     Notify.prototype.onClickNotification = function(e) {
         if (this.onClickCallback) {
             this.onClickCallback(e);
+        }
+
+        if (this.options.closeOnClick) {
+            this.close();
         }
     };
 

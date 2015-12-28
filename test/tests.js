@@ -104,7 +104,7 @@ describe('callbacks', function() {
         expect(callback).toHaveBeenCalled();
     });
 
-    it('should fire click callback', function() {
+    it('should fire click callback', function () {
         var notification = new Notify('foo', {
             notifyClick: callback
         });
@@ -112,7 +112,19 @@ describe('callbacks', function() {
         expect(callback).toHaveBeenCalled();
     });
 
-    it('should fire error callback', function() {
+    it('should close if closeOnClick is set when fire click callback', function () {
+        var notification = new Notify('foo', {
+            notifyClick: callback,
+            requireInteraction: true,
+            closeOnClick: true
+        });
+        spyOn(notification, 'close');
+        notification.onClickNotification();
+        expect(callback).toHaveBeenCalled();
+        expect(notification.close).toHaveBeenCalled();
+    });
+
+    it('should fire error callback', function () {
         var notification = new Notify('foo', {
             notifyError: callback
         });
@@ -155,5 +167,17 @@ describe('timeout', function() {
         expect(window.Notification.prototype.close).not.toHaveBeenCalled();
         clock.tick(1000);
         expect(window.Notification.prototype.close).toHaveBeenCalled();
+    });
+
+    it('should not close a notification automatically with requireInteraction', function () {
+        var notification = new Notify('foo', {
+            timeout: 1,
+            requireInteraction: true
+        });
+        spyOn(window.Notification.prototype, 'close');
+        notification.show();
+        expect(window.Notification.prototype.close).not.toHaveBeenCalled();
+        clock.tick(1000);
+        expect(window.Notification.prototype.close).not.toHaveBeenCalled();
     });
 });

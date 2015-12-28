@@ -78,6 +78,8 @@ Optional parameters
 * `tag`: (string) - unique identifier to stop duplicate notifications
 * `lang`: (string) - BCP 47 language tag for the notification (default: `en`)
 * `timeout`: (integer) - number of seconds to close the notification automatically
+* `requireInteraction`: (boolean) - keep the notification open indefinitely
+* `closeOnClick`: (boolean) - close the notification when clicked. Useful in chrome where the notification remains open until the timeout or the x is clicked.
 * `notifyShow`: (function) - callback when notification is shown
 * `notifyClose`: (function) - callback when notification is closed
 * `notifyClick`: (function) - callback when notification is clicked
