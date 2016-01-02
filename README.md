@@ -57,7 +57,7 @@ if (!Notify.needsPermission) {
 
 function onPermissionGranted() {
 	console.log('Permission has been granted by the user');
-	myNotification.show();
+	doNotification();
 }
 
 function onPermissionDenied() {
