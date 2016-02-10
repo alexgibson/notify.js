@@ -92,6 +92,11 @@ Static methods and properties
 * `Notify.isSupported` - Function to test for Web Notifications API browser support
 * `Notify.needsPermission` - Boolean property to check if permission is needed for the user to receive notifications.
 
+Instance methods
+-----------------------------
+* `Notify.show` - Function to display the Notify instance
+* `Notify.close` - Function to close the Notify instance
+
 Testing
 -------
 
