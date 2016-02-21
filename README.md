@@ -46,7 +46,13 @@ function onNotifyShow() {
 }
 ```
 
-Then show the notification.  It's a good idea to make sure that you have permissions to send notifications first.
+Then show the notification.  
+
+```
+myNotification.show();
+```
+
+It's a good idea to make sure that you have permissions to send notifications first.
 
 ```
 if (!Notify.needsPermission) {
