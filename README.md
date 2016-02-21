@@ -33,6 +33,9 @@ define(['./notify'], function(Notify) {
 var Notify = require('notifyjs');
 ```
 
+Usage
+-----
+
 To initialize a web notification create a new `Notify` instance, passing the message `title` as well as any other options you wish to use.
 
 ```
