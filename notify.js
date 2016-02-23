@@ -47,7 +47,8 @@
             notifyError: null,
             timeout: null,
             requireInteraction: false,
-            closeOnClick: false
+            closeOnClick: false,
+            silent: false
         };
 
         this.permission = null;
@@ -136,6 +137,7 @@
             'icon': this.options.icon,
             'lang': this.options.lang,
             'requireInteraction': this.options.requireInteraction,
+            'silent': this.options.silent,
             'closeOnClick': this.options.closeOnClick
         });
 
