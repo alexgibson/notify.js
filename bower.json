@@ -7,7 +7,7 @@
         "email": "alxgbsn@gmail.com"
     },
     "keywords": ["javascript", "web notifications", "notification", "notify"],
-    "main": "./notify.js",
+    "main": "./dist/notify.js",
     "repository": {
         "type": "git",
         "url": "https://github.com/alexgibson/notify.js.git"
@@ -18,8 +18,11 @@
         "url": "http://opensource.org/licenses/MIT"
     }],
     "ignore": [
+        "src",
         "test",
         ".jshintrc",
+        "jspm.browser.js",
+        "jspm.config.js",
         "karma.conf.js",
         "package.json",
         ".travis.yml"

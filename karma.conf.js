@@ -9,7 +9,7 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'notify.js',
+            'dist/notify.js',
             'test/*.js',
 
             { pattern: 'node_modules/sinon/pkg/sinon.js', watched: false, included: true }
