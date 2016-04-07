@@ -5,6 +5,20 @@
  */
 
 const N = window.Notification;
+const defaultOptions = {
+    icon: '',
+    body: '',
+    tag: '',
+    lang: 'en',
+    notifyShow: null,
+    notifyClose: null,
+    notifyClick: null,
+    notifyError: null,
+    timeout: null,
+    requireInteraction: false,
+    closeOnClick: false,
+    silent: false
+};
 
 function isFunction(item) {
     return typeof item === 'function';
@@ -17,29 +31,14 @@ function Notify(title, options) {
     }
 
     this.title = title;
-    this.options = {
-        icon: '',
-        body: '',
-        tag: '',
-        lang: 'en',
-        notifyShow: null,
-        notifyClose: null,
-        notifyClick: null,
-        notifyError: null,
-        timeout: null,
-        requireInteraction: false,
-        closeOnClick: false,
-        silent: false
-    };
     this.permission = null;
 
     //User defined options for notification content
     if (typeof options === 'object') {
-        for (let i in options) {
-            if(options.hasOwnProperty(i)) {
-                this.options[i] = options[i];
-            }
-        }
+        this.options = {
+            ...defaultOptions,
+            ...options
+        };
 
         //callback when notification is displayed
         if (isFunction(this.options.notifyShow)) {
