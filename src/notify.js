@@ -31,6 +31,7 @@ function Notify(title, options) {
     }
 
     this.title = title;
+    this.options = defaultOptions;
     this.permission = null;
 
     //User defined options for notification content
