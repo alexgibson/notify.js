@@ -4,6 +4,7 @@
   "description": "A handy wrapper for the Web Notifications API",
   "main": "dist/notify.js",
   "devDependencies": {
+    "eslint": "^2.7.0",
     "jasmine-core": "^2.3.4",
     "jspm": "^0.17.0-beta.12",
     "karma": "^0.13.10",
@@ -33,9 +34,11 @@
   },
   "scripts": {
     "postinstall": "jspm install",
+    "prebuild": "npm run lint",
     "build": "jspm build notifyjs dist/notify.js --format umd --global-name Notify --skip-source-maps",
     "pretest": "npm run build",
     "test": "./node_modules/.bin/karma start --browsers Firefox --single-run",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "lint": "./node_modules/.bin/eslint src/notify.js"
   }
 }

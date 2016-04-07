@@ -92,18 +92,18 @@ Notify.needsPermission = (N && N.permission && N.permission === 'granted') ? fal
 Notify.requestPermission = function(onPermissionGrantedCallback, onPermissionDeniedCallback) {
     N.requestPermission(function(perm) {
         switch (perm) {
-            case 'granted':
-                Notify.needsPermission = false;
-                if (isFunction(onPermissionGrantedCallback)) {
-                    onPermissionGrantedCallback();
-                }
-                break;
-            case 'denied':
-                Notify.needsPermission = true;
-                if (isFunction(onPermissionDeniedCallback)) {
-                    onPermissionDeniedCallback();
-                }
-                break;
+        case 'granted':
+            Notify.needsPermission = false;
+            if (isFunction(onPermissionGrantedCallback)) {
+                onPermissionGrantedCallback();
+            }
+            break;
+        case 'denied':
+            Notify.needsPermission = true;
+            if (isFunction(onPermissionDeniedCallback)) {
+                onPermissionDeniedCallback();
+            }
+            break;
         }
     });
 };
@@ -173,18 +173,18 @@ Notify.prototype.close = function() {
 
 Notify.prototype.handleEvent = function(e) {
     switch (e.type) {
-        case 'show':
-            this.onShowNotification(e);
-            break;
-        case 'close':
-            this.onCloseNotification(e);
-            break;
-        case 'click':
-            this.onClickNotification(e);
-            break;
-        case 'error':
-            this.onErrorNotification(e);
-            break;
+    case 'show':
+        this.onShowNotification(e);
+        break;
+    case 'close':
+        this.onCloseNotification(e);
+        break;
+    case 'click':
+        this.onClickNotification(e);
+        break;
+    case 'error':
+        this.onErrorNotification(e);
+        break;
     }
 };
 
