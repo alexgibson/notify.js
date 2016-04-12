@@ -20,7 +20,6 @@
     "ignore": [
         "src",
         "test",
-        ".jshintrc",
         "jspm.browser.js",
         "jspm.config.js",
         "karma.conf.js",
