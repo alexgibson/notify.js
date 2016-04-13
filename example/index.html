@@ -8,70 +8,70 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex, nofollow" />
 <style>
-button {
-	width: 100px;
-	height: 44px;
-}
+	button {
+			width: 100px;
+			height: 44px;
+	}
 </style>
 
 </head>
 <body>
-    <h1>Notify.js demo</h1>
-    <p>Notify.js is a simple wrapper for the Web Notification API. The GitHub repo is <a href="https://github.com/alexgibson/notify.js">here</a>.</p>
-    <p>Click the button below to fire up a notification. Currently supported in Chrome, Safari, Firefox and Firefox OS.</p>
-    <button id="my-button">Notify Me!</button>
+  <h1>Notify.js demo</h1>
+  <p>Notify.js is a simple wrapper for the Web Notification API. The GitHub repo is <a href="https://github.com/alexgibson/notify.js">here</a>.</p>
+  <p>Click the button below to fire up a notification. Currently supported in Chrome, Safari, Firefox and Firefox OS.</p>
+  <button id="my-button">Notify Me!</button>
 
-    <!-- JavaScript assets -->
-    <script src="../dist/notify.js"></script>
-    <script>
-        document.getElementById('my-button').addEventListener('click', function () {
+  <!-- JavaScript assets -->
+  <script src="../dist/notify.js"></script>
+  <script>
+    document.getElementById('my-button').addEventListener('click', function () {
 
-            function onShowNotification () {
-                console.log('notification is shown!');
-            }
+        function onShowNotification () {
+            console.log('notification is shown!');
+        }
 
-            function onCloseNotification () {
-                console.log('notification is closed!');
-            }
+        function onCloseNotification () {
+            console.log('notification is closed!');
+        }
 
-            function onClickNotification () {
-                console.log('notification was clicked!');
-            }
+        function onClickNotification () {
+            console.log('notification was clicked!');
+        }
 
-            function onErrorNotification () {
-                console.error('Error showing notification. You may need to request permission.');
-            }
+        function onErrorNotification () {
+            console.error('Error showing notification. You may need to request permission.');
+        }
 
-            function onPermissionGranted () {
-                console.log('Permission has been granted by the user');
-                doNotification();
-            }
+        function onPermissionGranted () {
+            console.log('Permission has been granted by the user');
+            doNotification();
+        }
 
-            function onPermissionDenied () {
-                console.warn('Permission has been denied by the user');
-            }
+        function onPermissionDenied () {
+            console.warn('Permission has been denied by the user');
+        }
 
-            function doNotification () {
-                var myNotification = new Notify('Yo dawg!', {
-                    body: 'This is an awesome notification',
-                    tag: 'My unique id',
-                    notifyShow: onShowNotification,
-                    notifyClose: onCloseNotification,
-                    notifyClick: onClickNotification,
-                    notifyError: onErrorNotification,
-                    timeout: 4
-                });
+        function doNotification () {
+            var myNotification = new Notify('Yo dawg!', {
+                body: 'This is an awesome notification',
+                tag: 'My unique id',
+                notifyShow: onShowNotification,
+                notifyClose: onCloseNotification,
+                notifyClick: onClickNotification,
+                notifyError: onErrorNotification,
+                timeout: 4
+            });
 
-                myNotification.show();
-            }
+            myNotification.show();
+        }
 
-            if (!Notify.needsPermission) {
-                doNotification();
-            } else if (Notify.isSupported()) {
-                Notify.requestPermission(onPermissionGranted, onPermissionDenied);
-            }
+        if (!Notify.needsPermission) {
+            doNotification();
+        } else if (Notify.isSupported()) {
+            Notify.requestPermission(onPermissionGranted, onPermissionDenied);
+        }
 
-        }, false);
-    </script>
+    }, false);
+  </script>
 </body>
 </html>
