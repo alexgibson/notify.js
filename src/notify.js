@@ -5,14 +5,6 @@
  */
 
 const N = window.Notification;
-const defaultOptions = { // Notification API default options
-    icon: '',
-    body: '',
-    tag: '',
-    lang: 'en',
-    requireInteraction: false,
-    silent: false
-};
 
 function isFunction(item) {
     return typeof item === 'function';
@@ -41,12 +33,8 @@ function Notify(title, options = {}) {
     } = options;
 
     this.title = title;
+    this.options = rest;
     this.permission = null;
-    this.options = {
-        ...defaultOptions,
-        ...rest
-    };
-
     this.closeOnClick = closeOnClick;
     this.timeout = timeout;
 
