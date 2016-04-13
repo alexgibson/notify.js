@@ -3,40 +3,26 @@ Notify.js
 
 [![Build Status](https://travis-ci.org/alexgibson/notify.js.png?branch=master)](https://travis-ci.org/alexgibson/notify.js)
 
-A handy wrapper for using the [Web Notifications API](http://www.w3.org/TR/notifications/). Notify.js aims to simplify requesting user permission and associated Web Notification API events, as well as providing a few extra callbacks and convenience methods.
+A handy wrapper for using the [Web Notifications API](http://www.w3.org/TR/notifications/).
+Notify.js aims to simplify requesting user permission and associated Web
+Notification API events, as well as providing a few extra callbacks and
+convenience methods.
 
 Online demo: https://alexgibson.github.io/notify.js/
 
 Installation
----------------------------------------
+------------
 
 * Download: [zip](https://github.com/alexgibson/notify.js/zipball/master)
 * [NPM](https://www.npmjs.org/): `npm install notifyjs`
 * [Bower](https://github.com/twitter/bower/): `bower install notify.js`
 * Git: `git clone https://github.com/alexgibson/notify.js`
 
-Setup
----------
-
-This component can be used as an AMD module, CommonJS module, or a global.
-
-### for AMD module:
-```
-define(['./notify'], function(Notify) {
-     var myNotification = new Notify();
-    // ...
-});
-```
-
-### for CommonJS:
-```
-var Notify = require('notifyjs');
-```
-
 Usage
 -----
 
-To initialize a web notification create a new `Notify` instance, passing the message `title` as well as any other options you wish to use.
+To initialize a web notification create a new `Notify` instance, passing the
+message `title` as well as any other options you wish to use.
 
 ```
 var myNotification = new Notify('Yo dawg!', {
@@ -55,7 +41,8 @@ Then show the notification.
 myNotification.show();
 ```
 
-It's a good idea to make sure that you have permissions to send notifications first.
+It's a good idea to make sure that you have permissions to send notifications
+first.
 
 ```
 if (!Notify.needsPermission) {
@@ -82,10 +69,12 @@ Required parameters
 Optional parameters
 -------------------
 
-All options supported in the [Notifications API specification](https://notifications.spec.whatwg.org/#dictdef-notificationoptions), in addition to:
+All options supported in the [Notifications API specification](https://notifications.spec.whatwg.org/#dictdef-notificationoptions),
+in addition to:
 
 * `timeout`: (integer) - number of seconds to close the notification automatically
-* `closeOnClick`: (boolean) - close the notification when clicked. Useful in chrome where the notification remains open until the timeout or the x is clicked.
+* `closeOnClick`: (boolean) - close the notification when clicked. Useful in
+chrome where the notification remains open until the timeout or the x is clicked.
 * `notifyShow`: (function) - callback when notification is shown
 * `notifyClose`: (function) - callback when notification is closed
 * `notifyClick`: (function) - callback when notification is clicked
@@ -94,44 +83,64 @@ All options supported in the [Notifications API specification](https://notificat
 Static methods and properties
 -----------------------------
 
-* `Notify.requestPermission(onPermissionGrantedCallback, onPermissionDeniedCallback)` - requests permission from the user if needed and handles permission callbacks.
-* `Notify.isSupported` - Function to test for Web Notifications API browser support
-* `Notify.needsPermission` - Boolean property to check if permission is needed for the user to receive notifications.
+* `Notify.requestPermission(onPermissionGrantedCallback, onPermissionDeniedCallback)` -
+requests permission from the user if needed and handles permission callbacks.
+* `Notify.isSupported` - Function to test for Web Notifications API browser
+support
+* `Notify.needsPermission` - Boolean property to check if permission is needed
+for the user to receive notifications.
 
 Instance methods
------------------------------
+----------------
 * `Notify.show` - Function to display the Notify instance
 * `Notify.close` - Function to close the Notify instance
 
-Testing
--------
+Build
+-----
 
-Install [Node](http://nodejs.org). Testing relies on the Karma test-runner, which can be installed by running the following command from the project root:
+To install dependencies:
 
 ```
 npm install
 ```
 
+To build from source:
+
+```
+npm run build
+```
+
+Lint
+----
+
+To run ESLint:
+
+```
+npm run lint
+```
+
+Test
+----
+
 In the project root, to perform a single pass of the tests using Firefox run:
 
 ```
-npm test
+npm run test
 ```
 
-Demo
-----
+This will also automatically build from source before running the tests.
 
-An easy way to run the provided demo file is to use python `SimpleHTTPServer` and then navigate to the `/example` directory:
+Demo example
+------------
+
+An easy way to run the provided demo file is to use python `SimpleHTTPServer`
+and then navigate to the `/example` directory:
 
 ```
 python -m SimpleHTTPServer
 ```
 
 Browser support
----------------------------------------
+---------------
 
-- Chrome (desktop)
-- Safari
-- Firefox
-- Firefox OS (v1.2+)
-- Firefox Mobile (Android)
+http://caniuse.com/#search=notifications
