@@ -5,61 +5,57 @@
  */
 
 const N = window.Notification;
-const defaultOptions = {
-    icon: '',
-    body: '',
-    tag: '',
-    lang: 'en',
-    notifyShow: null,
-    notifyClose: null,
-    notifyClick: null,
-    notifyError: null,
-    timeout: null,
-    requireInteraction: false,
-    closeOnClick: false,
-    silent: false
-};
 
 function isFunction(item) {
     return typeof item === 'function';
 }
 
-function Notify(title, options) {
+function Notify(title, options = {}) {
 
     if (typeof title !== 'string') {
         throw new Error('Notify(): first arg (title) must be a string.');
     }
 
+    if (typeof options !== 'object') {
+        throw new Error('Notify(): second arg (options) must be an object.');
+    }
+
+    const {
+        // Notify options
+        notifyShow = null,
+        notifyClose = null,
+        notifyClick = null,
+        notifyError = null,
+        closeOnClick = false,
+        timeout = null,
+        // Notification API options
+        ...rest
+    } = options;
+
     this.title = title;
-    this.options = defaultOptions;
+    this.options = rest;
     this.permission = null;
+    this.closeOnClick = closeOnClick;
+    this.timeout = timeout;
 
-    //User defined options for notification content
-    if (typeof options === 'object') {
-        this.options = {
-            ...defaultOptions,
-            ...options
-        };
+    //callback when notification is displayed
+    if (isFunction(notifyShow)) {
+        this.onShowCallback = notifyShow;
+    }
 
-        //callback when notification is displayed
-        if (isFunction(this.options.notifyShow)) {
-            this.onShowCallback = this.options.notifyShow;
-        }
+    //callback when notification is closed
+    if (isFunction(notifyClose)) {
+        this.onCloseCallback = notifyClose;
+    }
 
-        //callback when notification is closed
-        if (isFunction(this.options.notifyClose)) {
-            this.onCloseCallback = this.options.notifyClose;
-        }
+    //callback when notification is clicked
+    if (isFunction(notifyClick)) {
+        this.onClickCallback = notifyClick;
+    }
 
-        //callback when notification is clicked
-        if (isFunction(this.options.notifyClick)) {
-            this.onClickCallback = this.options.notifyClick;
-        }
-
-        //callback when notification throws error
-        if (isFunction(this.options.notifyError)) {
-            this.onErrorCallback = this.options.notifyError;
-        }
+    //callback when notification throws error
+    if (isFunction(notifyError)) {
+        this.onErrorCallback = notifyError;
     }
 }
 
@@ -110,18 +106,10 @@ Notify.requestPermission = function(onPermissionGrantedCallback, onPermissionDen
 
 
 Notify.prototype.show = function() {
-    this.myNotify = new N(this.title, {
-        'body': this.options.body,
-        'tag': this.options.tag,
-        'icon': this.options.icon,
-        'lang': this.options.lang,
-        'requireInteraction': this.options.requireInteraction,
-        'silent': this.options.silent,
-        'closeOnClick': this.options.closeOnClick
-    });
+    this.myNotify = new N(this.title, this.options);
 
-    if (!this.options.requireInteraction && this.options.timeout && !isNaN(this.options.timeout)) {
-        setTimeout(this.close.bind(this), this.options.timeout * 1000);
+    if (!this.options.requireInteraction && this.timeout && !isNaN(this.timeout)) {
+        setTimeout(this.close.bind(this), this.timeout * 1000);
     }
 
     this.myNotify.addEventListener('show', this, false);
@@ -148,7 +136,7 @@ Notify.prototype.onClickNotification = function(e) {
         this.onClickCallback(e);
     }
 
-    if (this.options.closeOnClick) {
+    if (this.closeOnClick) {
         this.close();
     }
 };
