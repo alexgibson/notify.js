@@ -18,6 +18,24 @@ Installation
 * [Bower](https://github.com/twitter/bower/): `bower install notify.js`
 * Git: `git clone https://github.com/alexgibson/notify.js`
 
+Build
+-----
+
+Notify.js is written in ES6 and transpiled to ES5 & UMD using [jspm](http://jspm.io/). Before
+building from source, make sure you have the [jspm CLI installed](http://jspm.io/docs/getting-started.html).
+
+Install dependencies:
+
+```
+npm install
+```
+
+Then build from source:
+
+```
+npm run build
+```
+
 Usage
 -----
 
@@ -94,30 +112,6 @@ Instance methods
 ----------------
 * `Notify.show` - Function to display the Notify instance
 * `Notify.close` - Function to close the Notify instance
-
-Build
------
-
-To install dependencies:
-
-```
-npm install
-```
-
-To build from source:
-
-```
-npm run build
-```
-
-Lint
-----
-
-To run ESLint:
-
-```
-npm run lint
-```
 
 Test
 ----
