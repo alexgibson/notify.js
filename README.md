@@ -43,6 +43,8 @@ To initialize a web notification create a new `Notify` instance, passing the
 message `title` as well as any other options you wish to use.
 
 ```
+var Notify = window.Notify.default;
+
 var myNotification = new Notify('Yo dawg!', {
 	body: 'This is an awesome notification',
 	notifyShow: onNotifyShow
