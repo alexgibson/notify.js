@@ -33,7 +33,6 @@
     "url": "https://github.com/alexgibson/notify.js/issues"
   },
   "scripts": {
-    "postinstall": "jspm install",
     "prebuild": "npm run lint",
     "build": "jspm build notifyjs dist/notify.js --format umd --global-name Notify --skip-source-maps",
     "pretest": "npm run build",

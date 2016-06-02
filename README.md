@@ -30,6 +30,12 @@ Install dependencies:
 npm install
 ```
 
+Install jspm dependencies:
+
+```
+jspm install
+```
+
 Then build from source:
 
 ```
