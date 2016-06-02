@@ -1,11 +1,16 @@
 language: node_js
+
 node_js:
   - "4"
+
 before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
+  - npm install -g jspm
+
 install:
   - npm install
   - jspm install
+
 addons:
   firefox: "latest"
