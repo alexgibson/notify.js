@@ -13,10 +13,11 @@ Online demo: https://alexgibson.github.io/notify.js/
 Installation
 ------------
 
-* Download: [zip](https://github.com/alexgibson/notify.js/zipball/master)
-* [NPM](https://www.npmjs.org/): `npm install notifyjs`
-* [Bower](https://github.com/twitter/bower/): `bower install notify.js`
-* Git: `git clone https://github.com/alexgibson/notify.js`
+```
+npm install notifyjs
+```
+
+Note: when installed via npm the Notify.js source file is located at `./dist/notify.js`.
 
 Build
 -----
@@ -47,6 +48,9 @@ Usage
 
 To initialize a web notification create a new `Notify` instance, passing the
 message `title` as well as any other options you wish to use.
+
+Note: this example is using a browser global, but you can also require Notify.js
+using CommonJS if you prefer.
 
 ```
 var Notify = window.Notify.default;
