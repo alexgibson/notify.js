@@ -37,7 +37,7 @@
     "build": "jspm build notifyjs dist/notify.js --format umd --global-name Notify --skip-source-maps",
     "pretest": "npm run build",
     "test": "karma start --browsers Firefox --single-run",
-    "prepublish": "npm run build",
+    "prepublish": "jspm install && npm run build",
     "lint": "eslint src/notify.js"
   }
 }
