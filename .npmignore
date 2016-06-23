@@ -10,4 +10,5 @@ bower.json
 
 .gitignore
 .travis.yml
-.jshintrc
+.eslintrc.js
+.editorconfig
