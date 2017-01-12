@@ -1,7 +1,7 @@
 {
     "name": "notify.js",
     "description": "A handy wrapper for the Web Notifications API",
-    "version": "2.0.3",
+    "version": "3.0.0",
     "author": {
         "name": "Alex Gibson",
         "email": "alxgbsn@gmail.com"
@@ -18,14 +18,14 @@
         "url": "http://opensource.org/licenses/MIT"
     }],
     "ignore": [
-        "src",
-        "test",
-        "jspm.browser.js",
-        "jspm.config.js",
+        ".babelrc",
+        ".editorconfig",
+        ".eslintrc.js",
+        ".travis.yml",
         "karma.conf.js",
         "package.json",
-        ".travis.yml",
-        ".eslintrc.js",
-        ".editorconfig"
+        "rollup.config.js"
+        "src",
+        "test",
     ]
 }

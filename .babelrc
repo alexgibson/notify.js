@@ -1,0 +1,15 @@
+{
+  "presets": [
+    [
+      "es2015",
+      {
+        "modules": false
+      }
+    ]
+  ],
+  "plugins": [
+    "external-helpers",
+    "babel-plugin-transform-object-rest-spread",
+    "babel-plugin-syntax-object-rest-spread"
+  ]
+}
