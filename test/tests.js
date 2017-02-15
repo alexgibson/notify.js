@@ -4,11 +4,9 @@ describe('instantiation', function() {
 
     'use strict';
 
-    var Notify = window.Notify.default;
-
     it('should create a new Notify instance', function() {
         var notification = new Notify('foo');
-        expect(notification instanceof window.Notify.default).toBeTruthy();
+        expect(notification instanceof window.Notify).toBeTruthy();
     });
 
     it('should throw an exception if has no title', function() {
@@ -21,8 +19,6 @@ describe('instantiation', function() {
 describe('isSupported', function() {
 
     'use strict';
-
-    var Notify = window.Notify.default;
 
     it('should return true when notifications are supported', function() {
         expect(Notify.isSupported()).toBeTruthy();
@@ -38,8 +34,6 @@ describe('isSupported', function() {
 describe('permission', function() {
 
     'use strict';
-
-    var Notify = window.Notify.default;
 
     afterEach(function() {
         Notify.permissionLevel = Notification.permission;
@@ -88,7 +82,6 @@ describe('callbacks', function() {
 
     'use strict';
 
-    var Notify = window.Notify.default;
     var callback;
 
     beforeEach(function() {
@@ -156,7 +149,6 @@ describe('timeout', function() {
 
     'use strict';
 
-    var Notify = window.Notify.default;
     var clock;
 
     beforeEach(function() {

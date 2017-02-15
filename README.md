@@ -22,19 +22,12 @@ Note: when installed via npm the Notify.js source file is located at `./dist/not
 Build
 -----
 
-Notify.js is written in ES6 and transpiled to ES5 & UMD using [jspm](http://jspm.io/). Before
-building from source, make sure you have the [jspm CLI installed](http://jspm.io/docs/getting-started.html).
+Notify.js is written in ES6 and transpiled to ES5 & UMD format using [Babel](http://babeljs.io) and [Rollup](http://rollupjs.org).
 
 Install dependencies:
 
 ```
 npm install
-```
-
-Install jspm dependencies:
-
-```
-jspm install
 ```
 
 Then build from source:
@@ -49,11 +42,8 @@ Usage
 To initialize a web notification create a new `Notify` instance, passing the
 message `title` as well as any other options you wish to use.
 
-Note: this example is using a browser global, but you can also require Notify.js
-using CommonJS if you prefer.
 
 ```
-var Notify = window.Notify.default;
 
 var myNotification = new Notify('Yo dawg!', {
 	body: 'This is an awesome notification',
@@ -65,7 +55,7 @@ function onNotifyShow() {
 }
 ```
 
-Then show the notification.  
+Then show the notification.
 
 ```
 myNotification.show();
