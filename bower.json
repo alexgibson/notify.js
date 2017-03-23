@@ -24,7 +24,7 @@
         ".travis.yml",
         "karma.conf.js",
         "package.json",
-        "rollup.config.js"
+        "rollup.config.js",
         "src",
         "test"
     ]
