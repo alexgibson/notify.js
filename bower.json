@@ -26,6 +26,6 @@
         "package.json",
         "rollup.config.js"
         "src",
-        "test",
+        "test"
     ]
 }
