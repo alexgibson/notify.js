@@ -43,8 +43,7 @@ To initialize a web notification create a new `Notify` instance, passing the
 message `title` as well as any other options you wish to use.
 
 
-```
-
+```javascript
 var myNotification = new Notify('Yo dawg!', {
 	body: 'This is an awesome notification',
 	notifyShow: onNotifyShow
@@ -57,14 +56,14 @@ function onNotifyShow() {
 
 Then show the notification.
 
-```
+```javascript
 myNotification.show();
 ```
 
 It's a good idea to make sure that you have permissions to send notifications
 first.
 
-```
+```javascript
 if (!Notify.needsPermission) {
     doNotification();
 } else if (Notify.isSupported()) {
